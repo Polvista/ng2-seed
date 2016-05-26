@@ -7,11 +7,11 @@
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
 		"removeComments": false,
+		"outDir": "dist",
 		"noImplicitAny": false
 	},
 	"exclude": [
 		"node_modules",
-		"typings/main",
-		"typings/main.d.ts"
+		"typings/tsd.d.ts"
 	]
 }

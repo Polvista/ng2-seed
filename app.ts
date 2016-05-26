@@ -5,7 +5,7 @@ import { bootstrap } from "@angular/platform-browser-dynamic";
 
 @Component({
     selector: 'app',
-    template: '<div>app 3</div>'
+    template: '<div>app 4</div>'
 })
 export class App {}
 
