@@ -11,6 +11,6 @@ export class ApiService {
     }
 
     getData() {
-        return this.http.get('http://jsonplaceholder.typicode.com/posts/1');
+        return this.http.get('https://baconipsum.com/api/?type=meat-and-filler');
     }
 }
