@@ -9,7 +9,7 @@ import { Routes, ROUTER_DIRECTIVES, Router } from '@angular/router';
         <button (click)="getData()">Request data</button>
         <div *ngIf="loading">Loading...</div>
 
-        <a *ngIf="loaded" [routerLink]="['../result', {id: 3}]">To results</a><br/>
+        <!--<a *ngIf="loaded" [routerLink]="['result']">To results</a><br/>-->
 
 
         <router-outlet></router-outlet>
@@ -18,6 +18,7 @@ import { Routes, ROUTER_DIRECTIVES, Router } from '@angular/router';
     directives: [ROUTER_DIRECTIVES]
 })
 @Routes([
+    {path: '/result', component: DataResultComponent}
 ])
 export class DataComponent {
     loading:boolean;
@@ -36,7 +37,7 @@ export class DataComponent {
                 this.loading = false;
                 this.loaded = true;
 
-                this.router.navigate(['result']);
+                this.router.navigate(['/data/result']);
 
                 console.log('success');
             },

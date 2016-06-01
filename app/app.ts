@@ -7,8 +7,8 @@ import {NameComp} from "./name.component";
 import {AppService} from "./AppService";
 import {User} from "./AppService";
 import {BehaviorSubject, Subject, Observable} from 'rxjs';
-import {DataComponent} from "./DataComponent";
-import {DataResultComponent} from "./DataResultComponent";
+import {DataComponent} from "./data/DataComponent";
+import {DataResultComponent} from "./data/DataResultComponent";
 
 @Component({
     selector: 'app',
@@ -40,8 +40,7 @@ import {DataResultComponent} from "./DataResultComponent";
 
 })
 @Routes([
-    { path: '/data', component: DataComponent},
-    {path: '/result/:id', component: DataResultComponent}
+    { path: '/data', component: DataComponent}
 ])
 export class App {
     title: string = 'title';
