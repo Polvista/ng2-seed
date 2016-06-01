@@ -10,6 +10,8 @@ declare var module;
     template: `
         <span class="quote-text text">"{{quote.text}}"</span><br/>
         <quote-author [author]="quote.author"></quote-author>
+        <br>
+        <ng-content></ng-content>
     `,
     directives: [QuoteAuthorComponent],
     styleUrls: ['app/quote/quote.css']  //TODO relative
