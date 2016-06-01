@@ -1,0 +1,15 @@
+.quote-text {
+	font-size: 18px;
+}
+
+.text {
+	color: gray;
+}
+
+:host {
+	background: lightblue;
+}
+
+:host-context(.chrome) .quote-text{
+	font-weight: bolder;
+}
