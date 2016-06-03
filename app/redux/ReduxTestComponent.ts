@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { Action } from 'redux';
