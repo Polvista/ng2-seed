@@ -4,13 +4,19 @@
     var map = {
         'app':                        'dist',
         'rxjs':                       'node_modules/rxjs',
-        '@angular':                   'node_modules/@angular'
+        '@angular':                   'node_modules/@angular',
+        'redux':                      'node_modules/redux/dist',
+        'ng2-redux':                  'node_modules/ng2-redux/lib',
+        'lodash':                     'node_modules/lodash'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': {main: 'main.js', defaultExtension: 'js'},
-        'rxjs': { main: 'Rx.js', defaultExtension: 'js' }  //TODO is main correct?
+        'rxjs': { main: 'Rx.js', defaultExtension: 'js' },  //TODO is main correct?
+        'redux': {main: 'redux.js', defaultExtension: 'js'}, //TODO min version?
+        'ng2-redux': {main: 'index.js', defaultExtension: 'js'},
+        'lodash': {main: 'index.js', defaultExtension: 'js'}
     };
 
     var packageNames = [
