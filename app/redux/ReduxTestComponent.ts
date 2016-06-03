@@ -3,6 +3,7 @@ import { NgRedux } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { Action } from 'redux';
 import { AppState } from "../store/AppState";
+import { Store } from "../store/Store";
 
 @Component({
     selector: 'redux-test',
@@ -14,12 +15,11 @@ import { AppState } from "../store/AppState";
 export class ReduxTestComponent {
     clicksCount: Observable<number>;
 
-    constructor(private ngRedux: NgRedux<AppState>){
-        this.clicksCount = <Observable<number>> ngRedux.select('clicksCount');
+    constructor(private store: Store){
+        this.clicksCount = this.store.select('clicksCount');
     }
 
     onClick() {
-        const action: Action = {type: 'INCREMENT'};
-        this.ngRedux.dispatch(<any> action);
+        this.store.dispatch({type: 'INCREMENT'});
     }
 }

@@ -1,6 +1,23 @@
-import {rootReducer} from './RootReducer';
-import { createStore, applyMiddleware } from 'redux';
+import { Injectable } from "@angular/core";
+import { Observable } from 'rxjs';
+import { NgRedux } from 'ng2-redux';
+import { Action } from "./Action";
+import { AppState } from "./AppState";
 
-const store = createStore(rootReducer);
+@Injectable()
+export class Store {
+    constructor(private ngRedux: NgRedux<AppState>) {
+    }
 
-export let store = store;
+    dispatch<A extends Action> (action: A) {
+        return this.ngRedux.dispatch(<any> action);
+    }
+
+    select<S>(selector: string | number | symbol | ((state: AppState) => S), comparer?: (x: any, y: any) => boolean): Observable<any> {  //TODO <any> or <S> ?
+        return this.ngRedux.select(selector);
+    }
+
+    getState(): AppState {
+        return this.ngRedux.getState();
+    }
+}
