@@ -7,22 +7,22 @@ import { AppState } from "./AppState";
 
 @Injectable()
 export class Store {
-    constructor(private ngRedux:NgRedux<AppState>) {
+    constructor(private ngRedux: NgRedux<AppState>) {
     }
 
-    dispatch<A extends Action> (action:A) {
-        return this.ngRedux.dispatch(<any> action);
+    dispatch<A extends Action> (action: A) {
+        return this.ngRedux.dispatch(action);
     }
 
-    select<S>(selector:string | number | symbol | ((state:AppState) => S), comparer?:(x:any, y:any) => boolean):Observable<any> {  //TODO <any> or <S> ?
+    select<S>(selector: string | number | symbol | ((state: AppState) => S), comparer?: (x: any, y: any) => boolean): Observable<any> {  //TODO <any> or <S> ?
         return this.ngRedux.select(selector);
     }
 
-    getState():AppState {
+    getState(): AppState {
         return this.ngRedux.getState();
     }
 
-    subscribe(listener:() => void): Unsubscribe {
+    subscribe(listener: () => void): Unsubscribe {
         return this.ngRedux.subscribe(listener);
     }
 }

@@ -7,7 +7,8 @@
         '@angular':                   'node_modules/@angular',
         'redux':                      'node_modules/redux/dist',
         'ng2-redux':                  'node_modules/ng2-redux/lib',
-        'lodash':                     'node_modules/lodash'
+        'lodash':                     'node_modules/lodash',
+        'traceur':                    'node_modules/traceur/dist/commonjs'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -16,7 +17,8 @@
         'rxjs': { main: 'Rx.js', defaultExtension: 'js' },  //TODO is main correct?
         'redux': {main: 'redux.js', defaultExtension: 'js'}, //TODO min version?
         'ng2-redux': {main: 'index.js', defaultExtension: 'js'},
-        'lodash': {main: 'index.js', defaultExtension: 'js'}
+        'lodash': {main: 'index.js', defaultExtension: 'js'},
+        'traceur': {main: 'traceur.js', defaultExtension: 'js'}
     };
 
     var packageNames = [

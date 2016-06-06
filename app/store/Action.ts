@@ -1,7 +1,3 @@
-export class Action {
+export interface Action {
     type: string;
-
-    constructor(type: string) {
-        this.type = type;
-    }
 }
