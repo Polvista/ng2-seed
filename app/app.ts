@@ -1,6 +1,7 @@
 /// <reference path="../typings/tsd.d.ts" />
 
-import { Component, ElementRef, Query, QueryList, AfterContentInit } from "@angular/core";
+
+import { Component, ElementRef, Query, QueryList, AfterContentInit, ApplicationRef, OnDestroy } from "@angular/core";
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 import {Name} from "./name.model";
 import {NameComp} from "./name.component";
@@ -13,11 +14,17 @@ import {QuoteComponent} from "./quote/QuoteComponent";
 import {Quote} from "./quote/Quote";
 import {Alert} from "./alert/AlertDirective";
 import {ReduxTestComponent} from "./redux/ReduxTestComponent";
+import {AppState} from "./store/AppState";
+import {Store} from "./store/Store";
+
 
 @Component({
     selector: 'app',
     template: `
         <redux-test></redux-test>
+
+        <immutable-with-mutations>
+        </immutable-with-mutations>
 
         <div *ngIf="showOldTests">
             <div>app 5 {{ title }}</div>
@@ -72,7 +79,7 @@ import {ReduxTestComponent} from "./redux/ReduxTestComponent";
 @Routes([
     { path: '/data', component: DataComponent}
 ])
-export class App implements AfterContentInit {
+export class App implements AfterContentInit, OnDestroy {
     title: string = 'title';
     names: Name[] = [];
     currentUser: Subject<User>;
@@ -80,10 +87,13 @@ export class App implements AfterContentInit {
     jobsQuote: Quote;
     quotes: QueryList<QuoteComponent>;
     showOldTests = false;
+    private unsubscribeFromDevTools: () => void;
 
     constructor(private appService: AppService,
                 private el: ElementRef,
-                @Query(QuoteComponent) quotes: QueryList<QuoteComponent>) {
+                @Query(QuoteComponent) quotes: QueryList<QuoteComponent>,
+                store: Store,
+                applicationRef: ApplicationRef) {
 
         this.appService.currentUser.subscribe((user: User) => console.log(user));
         this.currentUser = appService.currentUser;
@@ -95,10 +105,17 @@ export class App implements AfterContentInit {
 
         //console.log('quote', quotes.toArray());
         this.quotes = quotes;
+
+
+        this.unsubscribeFromDevTools = store.subscribe(() => applicationRef.tick()); //TODO in dev mode
     }
 
     ngAfterContentInit() {
         //console.log('quote after', this.quotes.toArray());
+    }
+
+    ngOnDestroy() {
+        this.unsubscribeFromDevTools && this.unsubscribeFromDevTools();
     }
 
     add(text: HTMLInputElement) {
