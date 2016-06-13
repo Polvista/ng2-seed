@@ -1,6 +1,6 @@
 
 export class PerfUtils {
-    static OBJECTS_COUNT = 6000;
+    static OBJECTS_COUNT = 8000;
 
     static generateBigState() {
         const perf = {};

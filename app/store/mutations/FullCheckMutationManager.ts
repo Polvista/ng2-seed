@@ -2,10 +2,28 @@ import {MutationManager} from "./MutationManager";
 import {AppState} from "../AppState";
 
 export class Es5MutationManager extends MutationManager {
+    private statePartsCache: WeakMap<any, any> = new WeakMap<any, any>();
 
     getMutableCopy(state: AppState): AppState {
         super.clearChanges();
-        return JSON.parse(JSON.stringify(state));
+        return this.getMutableCopyForObject(state, []);
+    }
+
+    private getMutableCopyForObject(object: any, path: string[]): any {
+        if(this.statePartsCache.has(object)) {
+            return this.statePartsCache.get(object);
+        }
+
+        const mutableCopy = Object.assign({}, object);
+        Object.keys(mutableCopy).forEach((propName: string) => {
+            if(this.isObject(mutableCopy[propName])) {
+                mutableCopy[propName] = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName]);
+            }
+        });
+
+        this.statePartsCache.set(object, mutableCopy);
+
+        return mutableCopy;
     }
 
     synchronizeState(state: AppState, mutatedState: AppState): AppState {
