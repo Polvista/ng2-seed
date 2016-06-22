@@ -14,7 +14,10 @@ import {SomeData} from "../store/AppState";
         <div>Clicks: {{clicksCount | async}} <button (click)="onClick()">click</button> <button (click)="add(5)">add five</button>
         </div>
         <div>{{ someData | async }}</div><button (click)="initPerf()">Init perf</button>
-    `
+
+        <div>Checked: {{getTime()}}</div>
+    `,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReduxTestComponent {
     clicksCount: Observable<number>;
@@ -35,5 +38,9 @@ export class ReduxTestComponent {
 
     initPerf() {
         this.store.dispatch(ReduxTestsActions.initPerf());
+    }
+
+    getTime() {
+        return new Date().toString();
     }
 }
