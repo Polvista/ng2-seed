@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {Store} from "../../store/Store";
-import {ReduxTestsActions} from "../../redux/ReduxTestActions";
 
 @Component({
     selector: 'immutable-with-mutations',
@@ -14,7 +13,7 @@ export class ImmutableWithMutations {
 
     changeDetection() {
         console.log('aa');
-        this.store.dispatch(ReduxTestsActions.increment());
+        this.store.dispatch({type: 'NONE'});
     }
 
 }

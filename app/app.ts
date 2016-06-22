@@ -16,6 +16,7 @@ import {Alert} from "./alert/AlertDirective";
 import {ReduxTestComponent} from "./redux/ReduxTestComponent";
 import {AppState} from "./store/AppState";
 import {Store} from "./store/Store";
+import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMutations";
 
 
 @Component({
@@ -72,7 +73,7 @@ import {Store} from "./store/Store";
             <button (click)="alert.showAlert()">Or get your alert here</button>
         </div>
     `,
-    directives: [ROUTER_DIRECTIVES, NameComp, QuoteComponent, Alert, ReduxTestComponent],
+    directives: [ROUTER_DIRECTIVES, NameComp, QuoteComponent, Alert, ReduxTestComponent, ImmutableWithMutations],
     providers: [AppService]
 
 })
