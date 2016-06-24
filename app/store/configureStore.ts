@@ -7,6 +7,7 @@ export const configureStore = () => {
     const composeFix: any = compose;
     let enhancers = [];
 
+    //enable in prod?
     if (process.env.ENV === 'development' && window && window.devToolsExtension) {
         enhancers = [...enhancers, window.devToolsExtension()];
     }
