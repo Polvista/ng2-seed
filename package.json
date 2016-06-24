@@ -47,7 +47,8 @@
     "concurrently": "1.0.0",
     "html-webpack-plugin": "^2.21.0",
     "live-server": "0.9.0",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^1.14.1",
+    "webpack-md5-hash": "0.0.5"
   },
   "bugs": {
     "url": "https://github.com/Polvista/ng2-seed/issues"
