@@ -1,4 +1,5 @@
 /// <reference path="../typings/tsd.d.ts" />
+/// <reference path="../typings/custom.d.ts" />
 
 import './app.css';
 

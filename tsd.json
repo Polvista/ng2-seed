@@ -7,6 +7,9 @@
   "installed": {
     "es6-shim/es6-shim.d.ts": {
       "commit": "7ad4e09016898d9c4837e250121fef2aedbecaaa"
+    },
+    "requirejs/require.d.ts": {
+      "commit": "ffd313adf9e5b86d9f04270e4e39b64720317352"
     }
   }
 }

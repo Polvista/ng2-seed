@@ -2,8 +2,6 @@ import {MutationManager} from "./MutationManager";
 import {AppState} from "../AppState";
 import {Immutable} from "./MutationManager";
 
-declare let Proxy;
-
 export class ProxyMutationManager extends MutationManager {
     private statePartsCache: WeakMap<any, any> = new WeakMap<any, any>(); //TODO delete unused objects
 

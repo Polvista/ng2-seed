@@ -8,7 +8,6 @@ import { provider } from  'ng2-redux';
 import { configureStore } from './store/configureStore';
 import { enableProdMode } from '@angular/core';
 
-declare var process;
 if (process.env.ENV === 'production') {
     enableProdMode();
 }

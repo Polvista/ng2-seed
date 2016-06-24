@@ -1,8 +1,7 @@
 import { rootMutableReducer } from './mutableReducer';
 import { createStore, applyMiddleware, compose } from 'redux';
 
-declare var window;
-declare var require;
+declare var window: Window & DevToolsExtension;
 
 export const configureStore = () => {
     const devMode = true; //TODO
