@@ -1,3 +1,4 @@
+var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./webpack.common.js');
 var WebpackMd5Hash = require('webpack-md5-hash');
@@ -16,6 +17,7 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
+        new webpack.NoErrorsPlugin(),
         new WebpackMd5Hash()
     ]
 
