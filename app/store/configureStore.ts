@@ -4,17 +4,14 @@ import { createStore, applyMiddleware, compose } from 'redux';
 declare var window: Window & DevToolsExtension;
 
 export const configureStore = () => {
-    const devMode = true; //TODO
-
-    var composeFix: any = compose;
-
+    const composeFix: any = compose;
     let enhancers = [];
 
-    if (devMode && window && window.devToolsExtension) {
+    if (process.env.ENV === 'development' && window && window.devToolsExtension) {
         enhancers = [...enhancers, window.devToolsExtension()];
     }
 
-    var Immutable = require('seamless-immutable');
+    const Immutable = require('seamless-immutable');
     const store = composeFix(...enhancers)(createStore)(rootMutableReducer, Immutable({
         clicksCount: 0,
         name: '123',
