@@ -42,7 +42,6 @@ export class App implements AfterContentInit, OnDestroy {
     currentUser: Subject<User>;
     keyups: Observable<any>;
     jobsQuote: Quote;
-    showOldTests = false;
     private unsubscribeFromDevTools: () => void;
 
     constructor(private store: Store,

@@ -1,6 +1,9 @@
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./webpack.common.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var DefinePlugin = require('webpack/lib/DefinePlugin');
+
+var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 module.exports = webpackMerge(commonConfig, {
 
@@ -8,8 +11,19 @@ module.exports = webpackMerge(commonConfig, {
 
     debug: true,
 
+    output: {
+        chunkFilename: '[id].chunk.js'
+    },
+
     plugins: [
-        new ExtractTextPlugin('[name].css')
+        //TODO change
+        new ExtractTextPlugin('[name].css'),
+
+        new DefinePlugin({
+            'process.env': {
+                'ENV': JSON.stringify(ENV)
+            }
+        })
     ],
 
     devServer: {
