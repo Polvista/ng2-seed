@@ -31,6 +31,7 @@ export let rootMutableReducer = (state: AppState, action): AppState => {
     console.time('reducer');
     const mutationManager: MutationManager = MutationManagerFactory.getInstance();
     const mutableState: AppState = mutationManager.getMutableCopy(state);
+    console.log('get', mutableState.clicksCount);
 
     mainReducer(mutableState, action);
 

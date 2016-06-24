@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterContentChecked } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject } from '@angular/core';
 import { NgRedux } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { Action } from 'redux';
@@ -23,7 +23,7 @@ export class ReduxTestComponent {
     clicksCount: Observable<number>;
     someData: Observable<SomeData>;
 
-    constructor(private store: Store){
+    constructor(@Inject('Store') private store: Store){
         this.clicksCount = this.store.select('clicksCount');
         this.someData = this.store.select('someData');
     }

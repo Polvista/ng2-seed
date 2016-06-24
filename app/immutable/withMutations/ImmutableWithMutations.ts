@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {Store} from "../../store/Store";
+import {ReduxTestsActions} from "../../redux/ReduxTestActions";
 
 @Component({
     selector: 'immutable-with-mutations',
@@ -9,7 +10,7 @@ import {Store} from "../../store/Store";
 })
 export class ImmutableWithMutations {
 
-    constructor(private store: Store){}
+    constructor(@Inject('Store') private store: Store){}
 
     changeDetection() {
         console.log('aa');

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
 import { Observable } from 'rxjs';
 import { Unsubscribe } from 'redux';
 import { NgRedux } from 'ng2-redux';
@@ -7,7 +7,9 @@ import { AppState } from "./AppState";
 
 @Injectable()
 export class Store {
-    constructor(private ngRedux: NgRedux<AppState>) {
+    ngRedux: any;
+    constructor(/*@Inject('ngRedux') private ngRedux: NgRedux<AppState>*/) {
+        this.ngRedux = {};
     }
 
     dispatch<A extends Action> (action: A) {

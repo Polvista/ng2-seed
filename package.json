@@ -7,7 +7,7 @@
     "clean": "rm -f ./*.js; rm -f ./*.js.map; rm -f ./intermediates/*.js; rm -f ./intermediates/*.js.map",
     "tsc": "./node_modules/.bin/tsc",
     "tsc:w": "./node_modules/.bin/tsc -w",
-    "serve": "./node_modules/.bin/live-server --host=localhost --port=8080 .",
+    "serve": "./node_modules/.bin/live-server --host=localhost --port=8080",
     "go": "concurrent \"npm run tsc:w\" \"npm run serve\" "
   },
   "repository": {
@@ -25,20 +25,27 @@
     "@angular/platform-browser-dynamic": "2.0.0-rc.1",
     "@angular/router": "2.0.0-rc.1",
     "core-js": "2.2.2",
+    "css-loader": "^0.23.1",
     "es6-shim": "0.35.0",
     "ng2-redux": "^2.3.3",
+    "path": "^0.12.7",
     "redux": "^3.5.2",
     "reflect-metadata": "0.1.3",
     "rxjs": "5.0.0-beta.6",
     "seamless-immutable": "^6.1.0",
+    "style-loader": "^0.13.1",
     "systemjs": "0.19.6",
     "traceur": "0.0.110",
-    "typescript": "1.9.0-dev.20160409",
+    "ts-loader": "^0.8.2",
+    "typescript": "^1.9.0-dev.20160409",
+    "webpack": "^1.13.1",
     "zone.js": "0.6.12"
   },
   "devDependencies": {
     "concurrently": "1.0.0",
-    "live-server": "0.9.0"
+    "html-webpack-plugin": "^2.21.0",
+    "live-server": "0.9.0",
+    "webpack-dev-server": "^1.14.1"
   },
   "bugs": {
     "url": "https://github.com/Polvista/ng2-seed/issues"

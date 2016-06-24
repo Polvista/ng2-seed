@@ -9,9 +9,12 @@ import { provider } from  'ng2-redux';
 
 import { rootMutableReducer } from './store/mutableReducer';
 import { createStore, applyMiddleware, compose } from 'redux';
-import {Store} from "./store/Store";
+import { Store } from "./store/Store";
 
-const APP_CONST: string = 'someString';
+declare var require;
+var Immutable = require('seamless-immutable');
+
+const APP_CONST = 'someString';
 const CONSTANTS: any[] = [
     provide('APP_CONST', {useValue: APP_CONST})
 ];
@@ -19,14 +22,14 @@ const CONSTANTS: any[] = [
 const devMode = true; //TODO
 
 declare var window;
-declare var Immutable;
+var composeFix: any = compose;
 
 let enhancers = [];
 
 if (devMode && window && window.devToolsExtension) {
     enhancers = [...enhancers, window.devToolsExtension()];
 }
-const store = compose(...enhancers)(createStore)(rootMutableReducer, Immutable({
+const store = composeFix(...enhancers)(createStore)(rootMutableReducer, Immutable({
     clicksCount: 0,
     name: '123',
     someData: {
@@ -34,4 +37,4 @@ const store = compose(...enhancers)(createStore)(rootMutableReducer, Immutable({
     }
 }));
 
-bootstrap(App, [HTTP_PROVIDERS, ROUTER_PROVIDERS, CONSTANTS, provider(store), Store]);
+bootstrap(App, [HTTP_PROVIDERS, ROUTER_PROVIDERS, CONSTANTS, provider(store)]);
