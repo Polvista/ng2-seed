@@ -42,13 +42,5 @@ module.exports = {
 
     resolve: {
         extensions: ['', '.ts', '.js', '.css']
-    },
-
-    devServer: {
-        historyApiFallback: true,
-        stats: 'minimal',
-        /*hot: true,*/
-        inline: true,
-        progress: true
     }
 };

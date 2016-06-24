@@ -1,7 +1,20 @@
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./webpack.common.js');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-console.log('dev');
+module.exports = webpackMerge(commonConfig, {
 
-module.exports = webpackMerge(commonConfig, {});
+    plugins: [
+        new ExtractTextPlugin('[name].css')
+    ],
+
+    devServer: {
+        historyApiFallback: true,
+        stats: 'minimal',
+        /*hot: true,*/
+        inline: true,
+        progress: true
+    }
+
+});
 

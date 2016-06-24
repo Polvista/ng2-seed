@@ -1,5 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
 
+import './app.css';
 
 import { Component, ElementRef, Query, QueryList, AfterContentInit, ApplicationRef, OnDestroy, Inject } from "@angular/core";
 import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
