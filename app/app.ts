@@ -63,7 +63,7 @@ export class App implements AfterContentInit, OnDestroy {
         //console.log('quote', quotes.toArray());
 
 
-        //this.unsubscribeFromDevTools = this.store.subscribe(() => applicationRef.tick()); //TODO in dev mode
+        this.unsubscribeFromDevTools = this.store.subscribe(() => applicationRef.tick()); //TODO in dev mode
     }
 
     ngAfterContentInit() {

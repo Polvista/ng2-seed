@@ -54,6 +54,8 @@ export class Es5MutationManager extends MutationManager {
                         path: [...path, mutatedObjProperty],
                         val: mutatedObjValue
                     });
+
+                    this.statePartsCache.delete(orig);
                 } else if(typeOfMutatedObjValue === "[object String]" ||
                           typeOfMutatedObjValue === "[object Number]" ||
                           typeOfMutatedObjValue === "[object Boolean]") {
@@ -65,6 +67,8 @@ export class Es5MutationManager extends MutationManager {
                             path: [...path, mutatedObjProperty],
                             val: mutatedObjValue
                         });
+
+                        this.statePartsCache.delete(orig);
                     }
                 } else if(typeOfMutatedObjValue === "[object Object]") {
                     this.findChangesForObjects(origObjValue, mutatedObjValue, [...path, mutatedObjProperty]);
@@ -78,17 +82,23 @@ export class Es5MutationManager extends MutationManager {
                     path: [...path, mutatedObjProperty],
                     val: mutated[mutatedObjProperty]
                 });
+
+                this.statePartsCache.delete(orig);
             }
 
         });
 
-        origObjProperties.forEach(origProperty => {
-            //deleted property
-            this.changes.push({
-                type: 'delete',
-                path: [...path, origProperty]
+        if(origObjProperties.length) {
+            this.statePartsCache.delete(orig);
+
+            origObjProperties.forEach(origProperty => {
+                //deleted property
+                this.changes.push({
+                    type: 'delete',
+                    path: [...path, origProperty]
+                });
             });
-        });
+        }
 
     }
 }

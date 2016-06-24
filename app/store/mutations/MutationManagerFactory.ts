@@ -7,9 +7,9 @@ export class MutationManagerFactory {
 
     public static getInstance(): MutationManager {
         if(!MutationManagerFactory.INSTANCE) {
-            MutationManagerFactory.INSTANCE = new ProxyMutationManager();
+            //MutationManagerFactory.INSTANCE = new ProxyMutationManager();
 
-            //MutationManagerFactory.INSTANCE = new Es5MutationManager();
+            MutationManagerFactory.INSTANCE = new Es5MutationManager();
         }
 
         return MutationManagerFactory.INSTANCE;
