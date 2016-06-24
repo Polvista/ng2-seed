@@ -6,6 +6,12 @@ import { App } from "./App";
 import { HTTP_PROVIDERS } from "@angular/http";
 import { provider } from  'ng2-redux';
 import { configureStore } from './store/configureStore';
+import { enableProdMode } from '@angular/core';
+
+declare var process;
+if (process.env.ENV === 'production') {
+    enableProdMode();
+}
 
 bootstrap(App,
     [
