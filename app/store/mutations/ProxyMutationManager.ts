@@ -29,13 +29,13 @@ export class ProxyMutationManager extends MutationManager {
             }
         });
 
-        const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path));
+        const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, object));
         this.statePartsCache.set(object, mutableCopyProxy);
 
         return mutableCopyProxy;
     }
 
-    private createMutationHandler(path) {
+    private createMutationHandler(path, mapKey) {
         const manager = this;
 
         return {
@@ -46,6 +46,8 @@ export class ProxyMutationManager extends MutationManager {
                     val
                 });
 
+                manager.statePartsCache.delete(mapKey);
+
                 target[name] = val;
                 return true;
             },
@@ -55,6 +57,8 @@ export class ProxyMutationManager extends MutationManager {
                     type: 'delete',
                     path: [...path, name]
                 });
+
+                manager.statePartsCache.delete(mapKey);
 
                 return true;
             }
