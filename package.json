@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -f ./*.js; rm -f ./*.js.map; rm -f ./intermediates/*.js; rm -f ./intermediates/*.js.map",
-    "tsc": "./node_modules/.bin/tsc",
-    "tsc:w": "./node_modules/.bin/tsc -w",
-    "serve": "./node_modules/.bin/live-server --host=localhost --port=8080",
-    "go": "concurrent \"npm run tsc:w\" \"npm run serve\" "
+    "clean": "rm -f ./dist/*",
+    "prod": "NODE_ENV=production webpack",
+    "dev": "webpack-dev-server",
+    "dev-build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -27,6 +26,7 @@
     "core-js": "2.2.2",
     "css-loader": "^0.23.1",
     "es6-shim": "0.35.0",
+    "file-loader": "^0.9.0",
     "ng2-redux": "^2.3.3",
     "path": "^0.12.7",
     "redux": "^3.5.2",
@@ -38,6 +38,7 @@
     "ts-loader": "^0.8.2",
     "typescript": "^1.9.0-dev.20160409",
     "webpack": "^1.13.1",
+    "webpack-merge": "^0.14.0",
     "zone.js": "0.6.12"
   },
   "devDependencies": {
