@@ -3,6 +3,7 @@ var commonConfig = require('./webpack.common.js');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = webpackMerge(commonConfig, {
+    devtool: 'cheap-module-source-map',
 
     plugins: [
         new ExtractTextPlugin('[name].css')
