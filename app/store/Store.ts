@@ -7,9 +7,7 @@ import { AppState } from "./AppState";
 
 @Injectable()
 export class Store {
-    ngRedux: any;
-    constructor(/*@Inject('ngRedux') private ngRedux: NgRedux<AppState>*/) {
-        this.ngRedux = {};
+    constructor(private ngRedux: NgRedux<AppState>) {
     }
 
     dispatch<A extends Action> (action: A) {

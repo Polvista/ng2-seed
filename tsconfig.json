@@ -3,7 +3,8 @@
 		"target": "es5",
 		"sourceMap": true,
 		"removeComments": true,
-		"experimentalDecorators": true
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true
 	},
 	"exclude": [
 		"node_modules"

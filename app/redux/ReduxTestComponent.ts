@@ -6,6 +6,7 @@ import { AppState } from "../store/AppState";
 import { Store } from "../store/Store";
 import {ReduxTestsActions} from "./ReduxTestActions";
 import {SomeData} from "../store/AppState";
+import {AppService} from "../AppService";
 
 @Component({
     selector: 'redux-test',
@@ -23,7 +24,7 @@ export class ReduxTestComponent {
     clicksCount: Observable<number>;
     someData: Observable<SomeData>;
 
-    constructor(@Inject('Store') private store: Store){
+    constructor(private store: Store){
         this.clicksCount = this.store.select('clicksCount');
         this.someData = this.store.select('someData');
     }
