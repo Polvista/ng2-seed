@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rm -f ./dist/*",
     "prod": "NODE_ENV=production webpack",
+    "server": "./node_modules/.bin/live-server --host=localhost --port=9090",
     "dev": "webpack-dev-server",
     "dev-build": "webpack"
   },
