@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var webpackMerge = require('webpack-merge');
 var commonConfig = require('./webpack.common.js');
+var path = require('path');
 var WebpackMd5Hash = require('webpack-md5-hash');
 var DefinePlugin = require('webpack/lib/DefinePlugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -39,7 +40,12 @@ module.exports = webpackMerge(commonConfig, {
             'process.env': {
                 'ENV': JSON.stringify(ENV)
             }
-        })
+        }),
+
+        new webpack.NormalModuleReplacementPlugin(
+            /angular2-hmr/,
+            path.join(__dirname, 'angular2-hmr-prod.js')
+        )
     ]
 
 });
