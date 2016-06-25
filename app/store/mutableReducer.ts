@@ -1,7 +1,6 @@
 import {AppState} from "./AppState";
 import {ReduxTestsActions} from "../redux/ReduxTestActions";
 import {MutationManager} from "./mutations/MutationManager";
-import {App} from "../App";
 import {MutationManagerFactory} from "./mutations/MutationManagerFactory";
 import {PerfUtils} from "./PerfUtils";
 
