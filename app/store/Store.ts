@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable, Inject, forwardRef } from "@angular/core";
 import { Observable } from 'rxjs';
 import { Unsubscribe } from 'redux';
 import { NgRedux } from 'ng2-redux';

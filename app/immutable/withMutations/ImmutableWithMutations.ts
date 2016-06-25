@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import {Store} from "../../store/Store";
-import {ReduxTestsActions} from "../../redux/ReduxTestActions";
 
 @Component({
     selector: 'immutable-with-mutations',

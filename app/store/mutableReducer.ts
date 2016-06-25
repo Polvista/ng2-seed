@@ -20,7 +20,7 @@ export let mainReducer = (state: AppState, action) => {
             delete state.name;
             state.justVal = true;
             break;
-        case 'ADD':
+        case ReduxTestsActions.ADD_NUM:
             state.clicksCount += action.num;
             break;
     }

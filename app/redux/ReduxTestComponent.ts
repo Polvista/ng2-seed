@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject, forwardRef } from '@angular/core';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { Action } from 'redux';
@@ -18,7 +18,8 @@ import {AppService} from "../AppService";
 
         <div>Checked: {{getTime()}}</div>
     `,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    providers: [ReduxTestsActions]
 })
 export class ReduxTestComponent {
 
@@ -28,19 +29,21 @@ export class ReduxTestComponent {
     @select()
     someData: Observable<SomeData>;
 
-    constructor(private store: Store){
+    constructor(
+        private store: Store,
+        private actions: ReduxTestsActions) {
     }
 
     onClick() {
-        this.store.dispatch(ReduxTestsActions.increment());
+        this.actions.increment();
     }
 
     add(num: number) {
-        this.store.dispatch({type: 'ADD', num});
+        this.actions.addNum(num);
     }
 
     initPerf() {
-        this.store.dispatch(ReduxTestsActions.initPerf());
+        this.actions.initPerf();
     }
 
     getTime() {

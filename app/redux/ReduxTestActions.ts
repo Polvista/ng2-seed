@@ -1,22 +1,30 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Action} from "../store/Action";
+import {Store} from "../store/Store";
 
-
+@Injectable()
 export class ReduxTestsActions {
     static INCREMENT = 'INCREMENT';
     static CHANGE_DATA = 'CHANGE_DATA';
     static INIT_PERF = 'INIT_PERF';
+    static ADD_NUM = 'ADD_NUM';
 
-    static increment() {
-        return {type: this.INCREMENT};
+    constructor(@Inject(forwardRef(() => Store)) private store: Store){}
+
+    increment() {
+        this.store.dispatch({type: ReduxTestsActions.INCREMENT});
     }
 
-    static changeData() {
-        return {type: this.CHANGE_DATA};
+    changeData() {
+        this.store.dispatch({type: ReduxTestsActions.CHANGE_DATA});
     }
 
-    static initPerf() {
-        return {type: this.INIT_PERF};
+    initPerf() {
+        this.store.dispatch({type: ReduxTestsActions.INIT_PERF});
+    }
+
+    addNum(num: number) {
+        this.store.dispatch({type: ReduxTestsActions.ADD_NUM, num});
     }
 }
 
