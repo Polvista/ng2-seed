@@ -21,8 +21,6 @@ export abstract class MutationManager {
     }
 
     applyChangesToState(state: AppState): AppState {
-        console.log(this.changes);
-
         this.changes.forEach(patch => {
             const nextVal = patch.type == 'update' ? patch.val : null;
             state = (<Immutable> state).setIn(patch.path, nextVal);
