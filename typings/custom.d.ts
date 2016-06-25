@@ -1,4 +1,5 @@
 declare const Proxy;
+declare const module;
 declare const process: NodeJSProcess;
 
 interface DevToolsExtension {

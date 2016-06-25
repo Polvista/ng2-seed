@@ -1,7 +1,8 @@
-import { Injectable, Inject, forwardRef } from "@angular/core";
+import { Injectable, Inject, forwardRef, ApplicationRef } from "@angular/core";
 import { Observable } from 'rxjs';
 import { Unsubscribe } from 'redux';
 import { NgRedux } from 'ng2-redux';
+import { HmrState } from 'angular2-hmr';
 import { Action } from "./Action";
 import { AppState } from "./AppState";
 import { rootMutableReducer } from './mutableReducer';
@@ -10,7 +11,29 @@ declare var window: Window & DevToolsExtension;
 
 @Injectable()
 export class Store {
-    constructor(private ngRedux: NgRedux<AppState>) {
+
+    @HmrState()
+    private ngRedux: NgRedux<AppState>;
+
+    constructor(public applicationRef: ApplicationRef) {
+
+        if(process.env.ENV === 'development') {
+            if(this.ngRedux) {
+                this.ngRedux.subscribe(() => applicationRef.tick());
+                return;
+            }
+
+            this.configureStore();
+            this.ngRedux.subscribe(() => applicationRef.tick());
+            return;
+        }
+
+        this.configureStore();
+    }
+
+    private configureStore() {
+        this.ngRedux = new NgRedux();
+
         const middleware = [];
         let enhancers = [];
 

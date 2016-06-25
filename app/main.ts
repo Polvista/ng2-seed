@@ -16,10 +16,20 @@ if (process.env.ENV === 'production') {
     enableProdMode();
 }
 
-bootstrap(App,
-    [
-        /*HTTP_PROVIDERS,
-        ROUTER_PROVIDERS,*/
-        NgRedux
-    ]
-);
+const bootstrapApp = (initialHMRstate?: any): Promise<any> => {
+    return bootstrap(App,
+        [
+            /*HTTP_PROVIDERS,
+             ROUTER_PROVIDERS,*/
+            /*NgRedux*/
+        ]
+    );
+};
+
+if (process.env.ENV === 'development') {
+    let ngHmr = require('angular2-hmr');
+    ngHmr.hotModuleReplacement(bootstrapApp, module);
+} else {
+    // bootstrap when document is ready
+    document.addEventListener('DOMContentLoaded', () => bootstrapApp());
+}
