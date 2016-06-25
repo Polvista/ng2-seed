@@ -8,7 +8,7 @@ import { App } from "./AppComponent";
 /*
 import { HTTP_PROVIDERS } from "@angular/http";
 */
-import { provider } from  'ng2-redux';
+import { NgRedux } from  'ng2-redux';
 import { configureStore } from './store/configureStore';
 import { enableProdMode } from '@angular/core';
 
@@ -20,6 +20,6 @@ bootstrap(App,
     [
         /*HTTP_PROVIDERS,
         ROUTER_PROVIDERS,*/
-        provider(configureStore())
+        NgRedux
     ]
 );

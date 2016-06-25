@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject } from '@angular/core';
-import { NgRedux } from 'ng2-redux';
+import { select } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { Action } from 'redux';
 import { AppState } from "../store/AppState";
@@ -14,19 +14,21 @@ import {AppService} from "../AppService";
         <div>redux test here!</div>
         <div>Clicks: {{clicksCount | async}} <button (click)="onClick()">click</button> <button (click)="add(5)">add five</button>
         </div>
-        <div>{{ someData | async }}</div><button (click)="initPerf()">Init perf</button>
+        <div>{{ someData | async | json}}</div><button (click)="initPerf()">Init perf</button>
 
         <div>Checked: {{getTime()}}</div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReduxTestComponent {
+
+    @select()
     clicksCount: Observable<number>;
+
+    @select()
     someData: Observable<SomeData>;
 
     constructor(private store: Store){
-        this.clicksCount = this.store.select('clicksCount');
-        this.someData = this.store.select('someData');
     }
 
     onClick() {

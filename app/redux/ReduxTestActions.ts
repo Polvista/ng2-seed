@@ -1,4 +1,6 @@
+import {Injectable} from '@angular/core';
 import {Action} from "../store/Action";
+
 
 export class ReduxTestsActions {
     static INCREMENT = 'INCREMENT';

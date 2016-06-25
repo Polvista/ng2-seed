@@ -21,7 +21,7 @@ import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMut
         <immutable-with-mutations>
         </immutable-with-mutations>
     `,
-    directives: [ReduxTestComponent],
+    directives: [ReduxTestComponent, ImmutableWithMutations],
     providers: [Store]
 
     /*,
@@ -30,12 +30,7 @@ import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMut
 
 })
 export class App implements AfterContentInit, OnDestroy {
-    private unsubscribeFromDevTools: () => void;
-
-    constructor(private store: Store,
-                applicationRef: ApplicationRef) {
-
-        this.unsubscribeFromDevTools = this.store.subscribe(() => applicationRef.tick()); //TODO in dev mode
+    constructor(private store: Store) {
     }
 
     ngAfterContentInit() {
@@ -43,7 +38,6 @@ export class App implements AfterContentInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.unsubscribeFromDevTools && this.unsubscribeFromDevTools();
     }
 
 }

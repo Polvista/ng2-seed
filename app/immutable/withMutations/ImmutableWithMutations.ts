@@ -10,7 +10,7 @@ import {ReduxTestsActions} from "../../redux/ReduxTestActions";
 })
 export class ImmutableWithMutations {
 
-    constructor(@Inject('Store') private store: Store){}
+    constructor(private store: Store){}
 
     changeDetection() {
         console.log('aa');
