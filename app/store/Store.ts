@@ -19,6 +19,7 @@ export class Store {
 
         if(process.env.ENV === 'development') {
             if(this.ngRedux) {
+                this.ngRedux.replaceReducer(rootMutableReducer);
                 this.ngRedux.subscribe(() => applicationRef.tick());
                 return;
             }

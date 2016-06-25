@@ -6,10 +6,6 @@ import {PerfUtils} from "./PerfUtils";
 
 
 export let mainReducer = (state: AppState, action) => {
-    console.log(state, action);
-
-
-
     switch (action.type) {
         case ReduxTestsActions.INIT_PERF:
             state.perf = PerfUtils.generateBigState();
@@ -30,7 +26,6 @@ export let rootMutableReducer = (state: AppState, action): AppState => {
     console.time('reducer');
     const mutationManager: MutationManager = MutationManagerFactory.getInstance();
     const mutableState: AppState = mutationManager.getMutableCopy(state);
-    console.log('get', mutableState.clicksCount);
 
     mainReducer(mutableState, action);
 
