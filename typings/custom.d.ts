@@ -3,7 +3,11 @@ declare const module;
 declare const process: NodeJSProcess;
 
 interface DevToolsExtension {
-    devToolsExtension?: () => void;
+    devToolsExtension?: (opts?: DevToolsExtensionOpts) => void;
+}
+
+interface DevToolsExtensionOpts {
+    deserializeState: (state: any) => any
 }
 
 interface NodeJSProcess {

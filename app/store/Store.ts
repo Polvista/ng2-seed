@@ -34,23 +34,22 @@ export class Store {
 
     private configureStore() {
         this.ngRedux = new NgRedux();
+        const Immutable = require('seamless-immutable');
 
         const middleware = [];
         let enhancers = [];
 
         //enable in prod?
         if (process.env.ENV === 'development' && window && window.devToolsExtension) {
-            enhancers = [...enhancers, window.devToolsExtension()];
+            const devToolsOpts = {
+                deserializeState(state) {
+                    return Immutable(state);
+                }
+            };
+            enhancers = [...enhancers, window.devToolsExtension(devToolsOpts)];
         }
 
-        const Immutable = require('seamless-immutable');
-        const initialState: AppState = Immutable({
-            clicksCount: 0,
-            name: '123',
-            someData: {
-                id: 44
-            }
-        });
+        const initialState: AppState = Immutable({});
 
         this.ngRedux.configureStore(rootMutableReducer, initialState, middleware, enhancers);
     }

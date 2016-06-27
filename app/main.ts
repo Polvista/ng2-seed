@@ -9,7 +9,6 @@ import { App } from "./AppComponent";
 import { HTTP_PROVIDERS } from "@angular/http";
 */
 import { NgRedux } from  'ng2-redux';
-import { configureStore } from './store/configureStore';
 import { enableProdMode } from '@angular/core';
 
 if (process.env.ENV === 'production') {
@@ -30,6 +29,5 @@ if (process.env.ENV === 'development') {
     let ngHmr = require('angular2-hmr');
     ngHmr.hotModuleReplacement(bootstrapApp, module);
 } else {
-    // bootstrap when document is ready
     document.addEventListener('DOMContentLoaded', () => bootstrapApp());
 }

@@ -2,34 +2,46 @@ import {AppState} from "./AppState";
 import {ReduxTestsActions} from "../redux/ReduxTestActions";
 import {MutationManager} from "./mutations/MutationManager";
 import {MutationManagerFactory} from "./mutations/MutationManagerFactory";
-import {PerfUtils} from "./PerfUtils";
+import {PerfUtils} from "./../redux/PerfUtils";
+import {ReduxTestManager} from "../redux/ReduxTestManager";
 
-
-export let mainReducer = (state: AppState, action) => {
-    switch (action.type) {
-        case ReduxTestsActions.INIT_PERF:
-            state.perf = PerfUtils.generateBigState();
-            break;
-        case ReduxTestsActions.INCREMENT:
-            state.clicksCount++;
-            state.someData.id++;
-            delete state.name;
-            state.justVal = true;
-            break;
-        case ReduxTestsActions.ADD_NUM:
-            state.clicksCount += action.num;
-            break;
-    }
+let globalManagers = [];
+let statePartManagers = {
+    reduxTest: ReduxTestManager
 };
 
+initManagers();
+
 export let rootMutableReducer = (state: AppState, action): AppState => {
-    console.time('reducer');
     const mutationManager: MutationManager = MutationManagerFactory.getInstance();
     const mutableState: AppState = mutationManager.getMutableCopy(state);
 
-    mainReducer(mutableState, action);
+    globalManagers.forEach(manager => {
+        manager[action.type] && manager[action.type](mutableState, action);
+    });
 
-    state =  mutationManager.synchronizeState(state, mutableState);
-    console.timeEnd('reducer');
+    Object.keys(statePartManagers).forEach(prop => {
+        const manager = statePartManagers[prop];
+
+        if(manager[action.type]) {
+            let statePart = mutableState[prop];
+            if(!statePart) {
+                mutableState[prop] = manager.initialValue;
+                statePart = mutableState[prop];
+            }
+
+            manager[action.type](statePart, action, mutableState);
+        }
+    });
+
+    state = mutationManager.synchronizeState(state, mutableState);
     return state;
 };
+
+function initManagers() {
+    globalManagers = globalManagers.map(managerClass => new managerClass());
+
+    Object.keys(statePartManagers).forEach(prop => {
+        statePartManagers[prop] = new statePartManagers[prop]();
+    });
+}
