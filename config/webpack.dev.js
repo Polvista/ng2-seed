@@ -20,7 +20,7 @@ module.exports = webpackMerge(commonConfig, {
         loaders: [
             {
                 test: /app\.scss$/,
-                loaders: ["style", 'css', 'sass']
+                loaders: ["style", 'css', 'postcss', 'sass']
             }
         ]
     },
