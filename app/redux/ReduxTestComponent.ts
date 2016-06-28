@@ -21,7 +21,7 @@ import {ReduxTestData} from "../store/AppState";
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [ReduxTestsActions],
-    styleUrls: ['./reduxTest.css']
+    styleUrls: ['reduxTest.css']
 })
 export class ReduxTestComponent {
 

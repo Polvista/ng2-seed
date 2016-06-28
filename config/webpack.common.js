@@ -22,11 +22,14 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                exclude: [/app.css$/],
                 loaders: ['to-string-loader', 'css']
-            }, {
+            },
+            {
                 test   : /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)/,
                 loader : 'file-loader'
-            }, {
+            },
+            {
                 test: /\.html$/,
                 loader: 'html'
             }
@@ -34,6 +37,7 @@ module.exports = {
     },
 
     plugins: [
+
         new webpack.optimize.CommonsChunkPlugin({
             name: ['vendors', 'polyfills']
         }),

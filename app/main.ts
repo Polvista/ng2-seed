@@ -1,5 +1,7 @@
 'use strict';
 
+import './app.css';
+
 import { bootstrap } from "@angular/platform-browser-dynamic";
 /*
 import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';

@@ -16,15 +16,23 @@ module.exports = webpackMerge(commonConfig, {
         chunkFilename: '[id].chunk.js'
     },
 
+    module: {
+        loaders: [
+            {
+                test: /app\.css$/,
+                loaders: ["style", 'css']
+            }
+        ]
+    },
+
     plugins: [
-        /*//TODO change
-        new ExtractTextPlugin('[name].css'),*/
 
         new DefinePlugin({
             'process.env': {
                 'ENV': JSON.stringify(ENV)
             }
         })
+
     ],
 
     devServer: {

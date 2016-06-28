@@ -21,6 +21,15 @@ module.exports = webpackMerge(commonConfig, {
         minimize: false // workaround for ng2 TODO test https://github.com/AngularClass/angular2-webpack-starter/blob/master/config/webpack.prod.js
     },
 
+    module: {
+        loaders: [
+            {
+                test: /app\.css$/,
+                loader: ExtractTextPlugin.extract("style-loader", 'css')
+            }
+        ]
+    },
+
     plugins: [
         new webpack.NoErrorsPlugin(),
         new webpack.optimize.DedupePlugin(),
@@ -33,8 +42,7 @@ module.exports = webpackMerge(commonConfig, {
         }),
         new WebpackMd5Hash(),
 
-        /*//TODO fix
-        new ExtractTextPlugin('[name].[hash].css'),*/
+        new ExtractTextPlugin('styles.[hash].css'),
 
         new DefinePlugin({
             'process.env': {
