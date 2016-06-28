@@ -26,7 +26,7 @@ export let rootMutableReducer = (state: AppState, action): AppState => {
         if(manager[action.type]) {
             let statePart = mutableState[prop];
             if(!statePart) {
-                mutableState[prop] = manager.initialValue;
+                mutableState[prop] = manager.initialValue();
                 statePart = mutableState[prop];
             }
 

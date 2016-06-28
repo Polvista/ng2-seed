@@ -5,8 +5,8 @@ import {PerfUtils} from "./PerfUtils";
 
 export class ReduxTestManager {
 
-    initialValue: ReduxTestData = {
-        clicksCount: 0
+    initialValue(): ReduxTestData {
+        return { clicksCount: 0 };
     };
 
     [ReduxTestsActions.INCREMENT] (reduxTestData: ReduxTestData) {

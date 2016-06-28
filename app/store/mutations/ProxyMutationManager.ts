@@ -12,10 +12,10 @@ export class ProxyMutationManager extends MutationManager {
             throw new Error('state must be an object');
         }
 
-        return this.getMutableCopyForObject(state, []);
+        return this.getMutableCopyForObject(state, [], []);
     }
 
-    private getMutableCopyForObject(object: any, path: string[]): any {
+    private getMutableCopyForObject(object: any, path: string[], relatedObjects: any[]): any {
         if(this.statePartsCache.has(object)) {
             return this.statePartsCache.get(object);
         }
@@ -23,17 +23,17 @@ export class ProxyMutationManager extends MutationManager {
         const mutableCopy = Object.assign({}, object);
         Object.keys(mutableCopy).forEach((propName: string) => {
             if(this.isObject(mutableCopy[propName])) {
-                mutableCopy[propName] = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName]);
+                mutableCopy[propName] = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName], [...relatedObjects, object]);
             }
         });
 
-        const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, object));
+        const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, [...relatedObjects, object]));
         this.statePartsCache.set(object, mutableCopyProxy);
 
         return mutableCopyProxy;
     }
 
-    private createMutationHandler(path, mapKey) {
+    private createMutationHandler(path, relatedObjects) {
         const manager = this;
 
         return {
@@ -44,7 +44,7 @@ export class ProxyMutationManager extends MutationManager {
                     val
                 });
 
-                manager.statePartsCache.delete(mapKey);
+                relatedObjects.forEach(relatedObject => manager.statePartsCache.delete(relatedObject));
 
                 target[name] = val;
                 return true;
@@ -56,7 +56,7 @@ export class ProxyMutationManager extends MutationManager {
                     path: [...path, name]
                 });
 
-                manager.statePartsCache.delete(mapKey);
+                relatedObjects.forEach(relatedObject => manager.statePartsCache.delete(relatedObject));
 
                 return true;
             }
