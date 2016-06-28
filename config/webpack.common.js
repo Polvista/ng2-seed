@@ -54,6 +54,6 @@ module.exports = {
     },
 
     postcss: function () {
-        return [autoprefixer, rucksack];
+        return [autoprefixer(), rucksack()];
     }
 };

@@ -25,7 +25,7 @@ module.exports = webpackMerge(commonConfig, {
         loaders: [
             {
                 test: /app\.scss$/,
-                loader: ExtractTextPlugin.extract("style-loader", 'css', 'postcss', 'sass')
+                loader: ExtractTextPlugin.extract("style-loader", 'css!postcss!sass')
             }
         ]
     },
