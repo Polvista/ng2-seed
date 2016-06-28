@@ -2,6 +2,7 @@
     background: lightblue;
     padding: 10px;
     display: flex;
+    font-size: responsive;
 
     &:after {
         content: '!';

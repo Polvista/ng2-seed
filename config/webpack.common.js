@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var rucksack = require('rucksack-css');
 
 module.exports = {
     entry: {
@@ -53,6 +54,6 @@ module.exports = {
     },
 
     postcss: function () {
-        return [autoprefixer];
+        return [autoprefixer, rucksack];
     }
 };
