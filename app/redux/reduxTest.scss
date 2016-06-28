@@ -1,0 +1,9 @@
+.redux-greetings {
+    background: lightblue;
+    padding: 10px;
+
+    &:after {
+        content: '!';
+        display: inline;
+    }
+}

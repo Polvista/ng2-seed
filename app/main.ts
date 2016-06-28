@@ -1,6 +1,6 @@
 'use strict';
 
-import './app.css';
+import './app.scss';
 
 import { bootstrap } from "@angular/platform-browser-dynamic";
 /*
