@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: {
@@ -23,7 +24,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: [/app.scss$/],
-                loaders: ['to-string-loader', 'css', 'sass']
+                loaders: ['to-string-loader', 'css', 'postcss', 'sass']
             },
             {
                 test   : /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)/,
@@ -49,5 +50,9 @@ module.exports = {
 
     resolve: {
         extensions: ['', '.ts', '.js', '.css']
+    },
+
+    postcss: function () {
+        return [autoprefixer];
     }
 };

@@ -1,6 +1,7 @@
 .redux-greetings {
     background: lightblue;
     padding: 10px;
+    display: flex;
 
     &:after {
         content: '!';
