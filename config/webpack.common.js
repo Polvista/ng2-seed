@@ -24,7 +24,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                exclude: [/app.scss$/],
+                exclude: [/app\.scss$/],
                 loaders: ['to-string-loader', 'css', 'postcss', 'sass']
             },
             {
