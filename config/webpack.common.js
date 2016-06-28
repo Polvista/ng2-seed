@@ -18,11 +18,11 @@ module.exports = {
         loaders: [
             {
                 test: /\.ts$/,
-                loader: 'ts'
+                loaders: ['ts', 'angular2-template-loader']
             },
             {
                 test: /\.css$/,
-                loader: 'style!css'
+                loaders: ['to-string-loader', 'css']
             }, {
                 test   : /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)/,
                 loader : 'file-loader'

@@ -12,7 +12,6 @@ export class ImmutableWithMutations {
     constructor(private store: Store){}
 
     changeDetection() {
-        console.log('aa');
         this.store.dispatch({type: 'NONE'});
     }
 

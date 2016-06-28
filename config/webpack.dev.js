@@ -17,8 +17,8 @@ module.exports = webpackMerge(commonConfig, {
     },
 
     plugins: [
-        //TODO change
-        new ExtractTextPlugin('[name].css'),
+        /*//TODO change
+        new ExtractTextPlugin('[name].css'),*/
 
         new DefinePlugin({
             'process.env': {

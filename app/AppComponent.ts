@@ -1,8 +1,6 @@
 /// <reference path="../typings/tsd.d.ts" />
 /// <reference path="../typings/custom.d.ts" />
 
-import './app.css';
-
 import { Component, ElementRef, AfterContentInit, ApplicationRef, OnDestroy } from "@angular/core";
 import {ReduxTestComponent} from "./redux/ReduxTestComponent";
 import {AppState} from "./store/AppState";

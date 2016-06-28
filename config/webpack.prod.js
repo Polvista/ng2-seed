@@ -33,8 +33,8 @@ module.exports = webpackMerge(commonConfig, {
         }),
         new WebpackMd5Hash(),
 
-        //TODO fix
-        new ExtractTextPlugin('[name].[hash].css'),
+        /*//TODO fix
+        new ExtractTextPlugin('[name].[hash].css'),*/
 
         new DefinePlugin({
             'process.env': {

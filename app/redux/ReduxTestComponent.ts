@@ -12,7 +12,7 @@ import {ReduxTestData} from "../store/AppState";
 @Component({
     selector: 'redux-test',
     template: `
-        <div>redux test here!</div>
+        <div class="redux-greetings">redux test here!</div>
         <div>Clicks: {{clicksCount | async}} <button (click)="onClick()">click</button> <button (click)="add(5)">add five</button>
         </div>
         <div>{{ someData | async | json}}</div><button (click)="initPerf()">Init perf</button>
@@ -20,7 +20,8 @@ import {ReduxTestData} from "../store/AppState";
         <div>Checked: {{getTime()}}</div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [ReduxTestsActions]
+    providers: [ReduxTestsActions],
+    styleUrls: ['./reduxTest.css']
 })
 export class ReduxTestComponent {
 
