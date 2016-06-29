@@ -21,6 +21,10 @@ module.exports = {
                 test: /\.scss$/,
                 exclude: [/app\.scss$/],
                 loaders: ['to-string-loader', 'css', 'postcss', 'sass']
+            },
+            {
+                test: /\.json$/,
+                loader: 'raw-loader'
             }
         ]
 
