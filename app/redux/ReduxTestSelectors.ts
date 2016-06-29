@@ -1,5 +1,6 @@
 import { AppState } from "../store/AppState";
 import { selector } from '../store/selector';
+import {SomeData} from "../store/AppState";
 
 export class ReduxTestSelectors {
 
@@ -9,8 +10,8 @@ export class ReduxTestSelectors {
 
     static clicksAndIds = selector<number>(
         ReduxTestSelectors.clicksCount,
-        (state: AppState) => state.reduxTest.someData.id,
-        (clicksCount, id) => clicksCount + id
+        ReduxTestSelectors.someData,
+        (clicksCount, someData: SomeData) => clicksCount + someData.id
     );
 
 }
