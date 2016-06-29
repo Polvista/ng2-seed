@@ -1,3 +1,4 @@
+/*
 import {
     REQUEST_URL,
     ORIGIN_URL,
@@ -34,4 +35,4 @@ export function ngApp(req, res) {
     };
 
     res.render('index', config);
-}
+}*/

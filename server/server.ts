@@ -1,3 +1,4 @@
+/*
 import 'angular2-universal/polyfills';
 
 import * as path from 'path';
@@ -33,4 +34,4 @@ app.use('/', ngApp);
 // Server
 app.listen(9999, () => {
     console.log('Listening on: http://localhost:3000');
-});
+});*/

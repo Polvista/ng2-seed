@@ -8,7 +8,7 @@ var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
 module.exports = webpackMerge(commonConfig, {
 
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'cheap-module-source-map',
 
     debug: true,
 

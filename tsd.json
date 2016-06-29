@@ -25,6 +25,9 @@
     },
     "mime/mime.d.ts": {
       "commit": "43449c604f997d75e917769c662e3d3b3fb2c0ae"
+    },
+    "reselect/reselect.d.ts": {
+      "commit": "43449c604f997d75e917769c662e3d3b3fb2c0ae"
     }
   }
 }

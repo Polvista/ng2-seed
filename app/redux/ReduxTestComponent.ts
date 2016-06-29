@@ -8,6 +8,7 @@ import {ReduxTestsActions} from "./ReduxTestActions";
 import {SomeData} from "../store/AppState";
 import {AppService} from "../AppService";
 import {ReduxTestData} from "../store/AppState";
+import {ReduxTestSelectors} from "./ReduxTestSelectors";
 
 @Component({
     selector: 'redux-test',
@@ -17,6 +18,8 @@ import {ReduxTestData} from "../store/AppState";
         </div>
         <div>{{ someData | async | json}}</div><button (click)="initPerf()">Init perf</button>
 
+        <div>Derived data: {{ clicksAndIds | async }}</div>
+
         <div>Checked: {{getTime()}}</div>
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -25,15 +28,20 @@ import {ReduxTestData} from "../store/AppState";
 })
 export class ReduxTestComponent {
 
-    @select(['reduxTest', 'clicksCount'])
+    @select(ReduxTestSelectors.clicksCount)
     clicksCount: Observable<number>;
 
     @select(['reduxTest', 'someData'])
     someData: Observable<SomeData>;
 
+    @select(ReduxTestSelectors.clicksAndIds)
+    clicksAndIds: Observable<number>;
+
     constructor(
         private store: Store,
         private actions: ReduxTestsActions) {
+
+        this.actions.init();
     }
 
     onClick() {

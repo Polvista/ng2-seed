@@ -4,12 +4,19 @@ import {Store} from "../store/Store";
 
 @Injectable()
 export class ReduxTestsActions {
+    static INIT_COUNTER = 'INIT_COUNTER';
     static INCREMENT = 'INCREMENT';
     static CHANGE_DATA = 'CHANGE_DATA';
     static INIT_PERF = 'INIT_PERF';
     static ADD_NUM = 'ADD_NUM';
 
     constructor(@Inject(forwardRef(() => Store)) private store: Store){}
+
+    init() {
+        if(!this.store.getState().reduxTest) {
+            this.store.dispatch({type: ReduxTestsActions.INIT_COUNTER});
+        }
+    }
 
     increment() {
         this.store.dispatch({type: ReduxTestsActions.INCREMENT});

@@ -6,8 +6,13 @@ import {PerfUtils} from "./PerfUtils";
 export class ReduxTestManager {
 
     initialValue(): ReduxTestData {
-        return { clicksCount: 0 };
+        return {};
     };
+
+    [ReduxTestsActions.INIT_COUNTER] (reduxTestData: ReduxTestData) {
+        reduxTestData.clicksCount = 0;
+        reduxTestData.someData = { id: 10 };
+    }
 
     [ReduxTestsActions.INCREMENT] (reduxTestData: ReduxTestData) {
         reduxTestData.clicksCount++;
