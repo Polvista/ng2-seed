@@ -8,7 +8,7 @@
     "prod": "NODE_ENV=production webpack",
     "serve-build": "http-server ./dist -p9000",
     "dev": "webpack-dev-server --hot --inline",
-    "server": "NODE_ENV=server",
+    "server": "NODE_ENV=server webpack",
     "dev-build": "webpack"
   },
   "repository": {
