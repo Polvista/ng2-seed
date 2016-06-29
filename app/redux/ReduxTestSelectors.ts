@@ -3,7 +3,9 @@ import { selector } from '../store/selector';
 
 export class ReduxTestSelectors {
 
-    static clicksCount = selector<number>((state: AppState) => state.reduxTest.clicksCount);
+    static clicksCount = (state: AppState) => state.reduxTest.clicksCount;
+
+    static someData = (state: AppState) => state.reduxTest.someData;
 
     static clicksAndIds = selector<number>(
         ReduxTestSelectors.clicksCount,
