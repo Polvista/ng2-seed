@@ -9,8 +9,6 @@ import {SomeData} from "../store/AppState";
 import {AppService} from "../AppService";
 import {ReduxTestData} from "../store/AppState";
 import {ReduxTestSelectors} from "./ReduxTestSelectors";
-import {ReduxTestSelectors} from "./ReduxTestSelectors";
-import {ReduxTestSelectors} from "./ReduxTestSelectors";
 
 @Component({
     selector: 'redux-test',
