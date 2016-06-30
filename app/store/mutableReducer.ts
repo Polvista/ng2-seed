@@ -22,7 +22,6 @@ export let rootMutableReducer = (state: AppState, action: Action): AppState => {
 };
 
 function manageAction(statePart: any, action: Action, state: AppState, manager: any) {
-    console.log(statePart, action.type, manager);
     if(manager[action.type]) {
         manager[action.type](statePart, action, state);
     }

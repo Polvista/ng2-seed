@@ -2,12 +2,15 @@ export const ACTIONS_MAP_PROPERTY: string = '__ACTIONS_MAP__';
 
 export function OnAction(actionType: string, useReturnValue = false) {
 
-    console.log('on action');
-
     return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
-        if(!this[ACTIONS_MAP_PROPERTY]) {
-            this[ACTIONS_MAP_PROPERTY] = {};
+        if(!target[ACTIONS_MAP_PROPERTY]) {
+            target[ACTIONS_MAP_PROPERTY] = {};
         }
+
+        target[ACTIONS_MAP_PROPERTY][actionType] = {
+            actionHandler: target[propertyKey],
+            useReturnValue
+        };
 
         return descriptor;
 
