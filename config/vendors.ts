@@ -7,3 +7,4 @@ import 'rxjs';
 import 'seamless-immutable';
 import 'redux';
 import 'ng2-redux';
+import 'reselect';
