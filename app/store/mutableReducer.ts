@@ -4,44 +4,24 @@ import {MutationManager} from "./mutations/MutationManager";
 import {MutationManagerFactory} from "./mutations/MutationManagerFactory";
 import {PerfUtils} from "./../redux/PerfUtils";
 import {ReduxTestManager} from "../redux/ReduxTestManager";
+import {Action} from "./Action";
+import {RootManager} from "./RootManager";
 
-let globalManagers = [];
-let statePartManagers = {
-    reduxTest: ReduxTestManager
-};
 
-initManagers();
-
-export let rootMutableReducer = (state: AppState, action): AppState => {
+export let rootMutableReducer = (state: AppState, action: Action): AppState => {
     const mutationManager: MutationManager = MutationManagerFactory.getInstance();
     const mutableState: AppState = mutationManager.getMutableCopy(state);
 
-    globalManagers.forEach(manager => {
-        manager[action.type] && manager[action.type](mutableState, action);
-    });
-
-    Object.keys(statePartManagers).forEach(prop => {
-        const manager = statePartManagers[prop];
-
-        if(manager[action.type]) {
-            let statePart = mutableState[prop];
-            if(!statePart) {
-                mutableState[prop] = manager.initialValue();
-                statePart = mutableState[prop];
-            }
-
-            manager[action.type](statePart, action, mutableState);
-        }
-    });
+    manageAction(mutableState, action, mutableState, new RootManager());
 
     state = mutationManager.synchronizeState(state, mutableState);
     return state;
 };
 
-function initManagers() {
-    globalManagers = globalManagers.map(managerClass => new managerClass());
+function manageAction(statePart: any, action: Action, state: AppState, manager: any) {
 
-    Object.keys(statePartManagers).forEach(prop => {
-        statePartManagers[prop] = new statePartManagers[prop]();
-    });
+    if(manager[action.type]) {
+        manager[action.type](statePart, action, state);
+    }
+
 }
