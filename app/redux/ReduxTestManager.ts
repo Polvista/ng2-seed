@@ -2,10 +2,12 @@ import {ReduxTestsActions} from "./ReduxTestActions";
 import {ReduxTestData} from "../store/AppState";
 import {PerfUtils} from "./PerfUtils";
 import {AppState} from "../store/AppState";
+import {OnAction} from "../store/OnAction";
 
 
 export class ReduxTestManager {
 
+    @OnAction(ReduxTestsActions.INIT_COUNTER)
     [ReduxTestsActions.INIT_COUNTER] (reduxTest: ReduxTestData) {
         reduxTest.clicksCount = 0;
         reduxTest.someData = { id: 10 };
