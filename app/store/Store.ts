@@ -49,7 +49,7 @@ export class Store {
             enhancers = [...enhancers, window.devToolsExtension(devToolsOpts)];
         }
 
-        const initialState: AppState = Immutable({ reduxTest: {} });
+        const initialState: AppState = Immutable({});
 
         this.ngRedux.configureStore(rootMutableReducer, initialState, middleware, enhancers);
     }
