@@ -8,23 +8,26 @@ import {OnAction} from "../store/OnAction";
 export class ReduxTestManager {
 
     @OnAction(ReduxTestsActions.INIT_COUNTER)
-    [ReduxTestsActions.INIT_COUNTER] (reduxTest: ReduxTestData) {
+    init(reduxTest: ReduxTestData) {
         reduxTest.clicksCount = 0;
         reduxTest.someData = { id: 10 };
         reduxTest.initialized = true;
     }
 
-    [ReduxTestsActions.INCREMENT] (reduxTest: ReduxTestData) {
+    @OnAction(ReduxTestsActions.INCREMENT)
+    increment(reduxTest: ReduxTestData) {
         reduxTest.clicksCount++;
         delete reduxTest.name;
         reduxTest.justVal = true;
     }
 
-    [ReduxTestsActions.ADD_NUM] (reduxTest: ReduxTestData, action) {
+    @OnAction(ReduxTestsActions.ADD_NUM)
+    addNum(reduxTest: ReduxTestData, action) {
         reduxTest.clicksCount += action.num;
     }
 
-    [ReduxTestsActions.INIT_PERF] (reduxTest: ReduxTestData) {
+    @OnAction(ReduxTestsActions.INIT_PERF)
+    initPerf(reduxTest: ReduxTestData) {
         reduxTest.perf = PerfUtils.generateBigState();
     }
 
