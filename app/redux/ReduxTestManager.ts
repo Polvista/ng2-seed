@@ -2,16 +2,19 @@ import {ReduxTestsActions} from "./ReduxTestActions";
 import {ReduxTestData} from "../store/AppState";
 import {PerfUtils} from "./PerfUtils";
 import {AppState} from "../store/AppState";
-import {OnAction} from "../store/OnAction";
+import {OnAction, UseReturnValue} from "../store/OnAction";
 
 
 export class ReduxTestManager {
 
+    @UseReturnValue()
     @OnAction(ReduxTestsActions.INIT_COUNTER)
-    init(reduxTest: ReduxTestData) {
-        reduxTest.clicksCount = 0;
-        reduxTest.someData = { id: 10 };
-        reduxTest.initialized = true;
+    init() {
+        return {
+            clicksCount: 0,
+            someData: { id: 10 },
+            initialized: true
+        }
     }
 
     @OnAction(ReduxTestsActions.INCREMENT)

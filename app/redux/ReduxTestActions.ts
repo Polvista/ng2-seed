@@ -13,7 +13,7 @@ export class ReduxTestsActions {
     constructor(@Inject(forwardRef(() => Store)) private store: Store){}
 
     init() {
-        if(!this.store.getState().reduxTest.initialized) {
+        if(!this.store.getState().reduxTest) {
             this.store.dispatch({type: ReduxTestsActions.INIT_COUNTER});
         }
     }

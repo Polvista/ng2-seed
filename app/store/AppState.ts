@@ -7,7 +7,6 @@ export interface SomeData {
 }
 
 export interface ReduxTestData {
-    initialized?: boolean;
     clicksCount?: number;
     someData?: SomeData;
     name?: string;
