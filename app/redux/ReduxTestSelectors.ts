@@ -1,14 +1,23 @@
 import { AppState } from "../store/AppState";
-import { selector } from '../store/selector';
+import { selector, nullSafeSelector, nullSafe } from '../store/selector';
 import {SomeData} from "../store/AppState";
+import {ReduxTestData} from "../store/AppState";
 
 export class ReduxTestSelectors {
 
-    static clicksCount = (state: AppState) => state.reduxTest.clicksCount;
+    static reduxTest = (state: AppState) => state.reduxTest;
 
-    static someData = (state: AppState) => state.reduxTest.someData;
+    static clicksCount = nullSafeSelector<number>(
+        ReduxTestSelectors.reduxTest,
+        (reduxTest: ReduxTestData) => reduxTest.clicksCount
+    );
 
-    static clicksAndIds = selector<number>(
+    static someData = nullSafeSelector<SomeData>(
+        ReduxTestSelectors.reduxTest,
+        (reduxTest: ReduxTestData) => reduxTest.someData
+    );
+
+    static clicksAndIds = nullSafeSelector<number>(
         ReduxTestSelectors.clicksCount,
         ReduxTestSelectors.someData,
         (clicksCount, someData: SomeData) => clicksCount + someData.id

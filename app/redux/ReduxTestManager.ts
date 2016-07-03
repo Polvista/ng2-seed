@@ -34,4 +34,10 @@ export class ReduxTestManager {
         reduxTest.perf = PerfUtils.generateBigState();
     }
 
+    @UseReturnValue()
+    @OnAction('CLEAR')
+    clear() {
+        return null;
+    }
+
 }
