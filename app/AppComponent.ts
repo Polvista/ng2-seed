@@ -2,6 +2,7 @@
 /// <reference path="../typings/custom.d.ts" />
 
 import { Component, ElementRef, AfterContentInit, ApplicationRef, OnDestroy } from "@angular/core";
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import {ReduxTestComponent} from "./redux/ReduxTestComponent";
 import {AppState} from "./store/AppState";
 import {Store} from "./store/Store";
@@ -14,12 +15,15 @@ import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMut
 
         Hello
 
-        <redux-test></redux-test>
+        <a [routerLink]="['/about']">show about</a>
+        <a [routerLink]="['/']">show tests</a>
+
+        <router-outlet></router-outlet>
 
         <immutable-with-mutations>
         </immutable-with-mutations>
     `,
-    directives: [ReduxTestComponent, ImmutableWithMutations],
+    directives: [ROUTER_DIRECTIVES, ImmutableWithMutations],
     providers: [Store]
 
     /*,

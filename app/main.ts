@@ -3,15 +3,15 @@
 import './app.scss';
 
 import { bootstrap } from "@angular/platform-browser-dynamic";
-/*
-import { Routes, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
-*/
 import { App } from "./AppComponent";
+import { routes } from "./routes";
 /*
 import { HTTP_PROVIDERS } from "@angular/http";
 */
 import { NgRedux } from  'ng2-redux';
 import { enableProdMode } from '@angular/core';
+import { provideRouter, RouterConfig } from '@angular/router';
+
 
 if (process.env.ENV === 'production') {
     enableProdMode();
@@ -23,6 +23,7 @@ const bootstrapApp = (initialHMRstate?: any): Promise<any> => {
             /*HTTP_PROVIDERS,
              ROUTER_PROVIDERS,*/
             /*NgRedux*/
+            provideRouter(routes)
         ]
     );
 };
