@@ -1,15 +1,18 @@
 import {Injectable, Inject, forwardRef} from '@angular/core';
-import {Action} from "../store/Action";
+import {Action} from "../store/actions/Action";
 import {Store} from "../store/Store";
-import {ActionCreator} from "../store/ActionCreator";
+import {ActionCreator} from "../store/actions/ActionCreator";
+import {ActionTypeCreator} from "../store/actions/ActionTypeCreator";
 
 @Injectable()
 export class ReduxTestsActions extends ActionCreator {
-    static INIT_COUNTER = 'INIT_COUNTER';
-    static INCREMENT = 'INCREMENT';
-    static CHANGE_DATA = 'CHANGE_DATA';
-    static INIT_PERF = 'INIT_PERF';
-    static ADD_NUM = 'ADD_NUM';
+    private static typeCreator = new ActionTypeCreator('REDUX_TEST');
+
+    static INIT_COUNTER = ReduxTestsActions.typeCreator.type('INIT_COUNTER');
+    static INCREMENT = ReduxTestsActions.typeCreator.type('INCREMENT');
+    static CHANGE_DATA = ReduxTestsActions.typeCreator.type('CHANGE_DATA');
+    static INIT_PERF = ReduxTestsActions.typeCreator.type('INIT_PERF');
+    static ADD_NUM = ReduxTestsActions.typeCreator.type('ADD_NUM');
 
     constructor(@Inject(forwardRef(() => Store)) store: Store){
         super(store);

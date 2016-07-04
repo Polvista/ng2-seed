@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { Unsubscribe } from 'redux';
 import { NgRedux } from 'ng2-redux';
 import { HmrState } from 'angular2-hmr';
-import { Action } from "./Action";
+import { Action } from "./actions/Action";
 import { AppState } from "./AppState";
 import { rootMutableReducer } from './mutableReducer';
+import { actionTypesSupport } from "./middlewares/actionTypesSupport";
 
 declare var window: Window & DevToolsExtension;
 
@@ -36,7 +37,7 @@ export class Store {
         this.ngRedux = new NgRedux();
         const Immutable = require('seamless-immutable');
 
-        const middleware = [];
+        const middleware = [actionTypesSupport];
         let enhancers = [];
 
         //enable in prod?
