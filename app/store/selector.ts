@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect';
 import { AppState } from "./AppState";
-import {ReduxTestsActions} from "../redux/ReduxTestActions";
 import {ReduxTestData} from "./AppState";
-import {ReduxTestsActions} from "../redux/ReduxTestActions";
 
 export function selector<Output>(...params: any[]): (state: AppState) => Output {
     if(params.length < 2) {

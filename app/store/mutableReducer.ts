@@ -25,7 +25,7 @@ export let rootMutableReducer = (state: AppState, action: Action): AppState => {
 function manageAction(statePart: any, action: Action, state: AppState, manager: any, parentPart: any, propName: string) {
     if(manager[ACTIONS_MAP_PROPERTY] && manager[ACTIONS_MAP_PROPERTY][action.type]) {
         manager[ACTIONS_MAP_PROPERTY][action.type].forEach(( {handlerMethodName} ) => {
-            const result = manager[handlerMethodName](statePart, action, state);
+            const result = manager[handlerMethodName](statePart, action.payload, state);
             if(manager[RETURN_VALUES_METHODS_PROPERTY] && manager[RETURN_VALUES_METHODS_PROPERTY].indexOf(handlerMethodName) > -1) {
                 parentPart[propName] = result;
             }

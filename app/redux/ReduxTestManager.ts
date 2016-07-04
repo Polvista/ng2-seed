@@ -25,8 +25,8 @@ export class ReduxTestManager {
     }
 
     @OnAction(ReduxTestsActions.ADD_NUM)
-    addNum(reduxTest: ReduxTestData, action) {
-        reduxTest.clicksCount += action.num;
+    addNum(reduxTest: ReduxTestData, num: number) {
+        reduxTest.clicksCount += num;
     }
 
     @OnAction(ReduxTestsActions.INIT_PERF)
