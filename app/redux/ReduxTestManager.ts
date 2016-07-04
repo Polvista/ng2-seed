@@ -35,7 +35,7 @@ export class ReduxTestManager {
     }
 
     @UseReturnValue()
-    @OnAction('CLEAR')
+    @OnAction(ReduxTestsActions.CLEAR)
     clear() {
         return null;
     }

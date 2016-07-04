@@ -13,6 +13,7 @@ export class ReduxTestsActions extends ActionCreator {
     static CHANGE_DATA = ReduxTestsActions.typeCreator.type('CHANGE_DATA');
     static INIT_PERF = ReduxTestsActions.typeCreator.type('INIT_PERF');
     static ADD_NUM = ReduxTestsActions.typeCreator.type('ADD_NUM');
+    static CLEAR = ReduxTestsActions.typeCreator.type('CLEAR');
 
     constructor(@Inject(forwardRef(() => Store)) store: Store){
         super(store);
@@ -38,6 +39,10 @@ export class ReduxTestsActions extends ActionCreator {
 
     addNum(num: number) {
         this.dispatch(ReduxTestsActions.ADD_NUM, num);
+    }
+
+    clear() {
+        this.dispatch(ReduxTestsActions.CLEAR);
     }
 }
 

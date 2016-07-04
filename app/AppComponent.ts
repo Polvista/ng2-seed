@@ -25,18 +25,12 @@ import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMut
     `,
     directives: [ROUTER_DIRECTIVES, ImmutableWithMutations],
     providers: [Store]
-
-    /*,
-     directives: [ROUTER_DIRECTIVES, NameComp, QuoteComponent, Alert, ReduxTestComponent, ImmutableWithMutations],
-     providers: [AppService]*/
-
 })
 export class App implements AfterContentInit, OnDestroy {
     constructor(private store: Store) {
     }
 
     ngAfterContentInit() {
-        //console.log('quote after', this.quotes.toArray());
     }
 
     ngOnDestroy() {

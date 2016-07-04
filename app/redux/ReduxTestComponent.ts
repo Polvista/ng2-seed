@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject, forwardRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject, forwardRef, OnDestroy } from '@angular/core';
 import { select } from 'ng2-redux';
 import { Observable } from 'rxjs';
 import { Action } from 'redux';
@@ -26,7 +26,7 @@ import {ReduxTestSelectors} from "./ReduxTestSelectors";
     providers: [ReduxTestsActions],
     styleUrls: ['reduxTest.scss']
 })
-export class ReduxTestComponent {
+export class ReduxTestComponent implements OnDestroy {
 
     @select(ReduxTestSelectors.clicksCount)
     clicksCount: Observable<number>;
@@ -58,5 +58,9 @@ export class ReduxTestComponent {
 
     getTime() {
         return new Date().toString();
+    }
+
+    ngOnDestroy() {
+        this.actions.clear();
     }
 }
