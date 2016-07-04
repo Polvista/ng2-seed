@@ -12,8 +12,7 @@ export class ReduxTestManager {
     init() {
         return {
             clicksCount: 0,
-            someData: { id: 10 },
-            initialized: true
+            someData: { id: 10 }
         }
     }
 

@@ -4,7 +4,7 @@ import './app.scss';
 
 import { bootstrap } from "@angular/platform-browser-dynamic";
 import { App } from "./AppComponent";
-import { routes } from "./routes";
+import { routes } from "./routes/routes";
 /*
 import { HTTP_PROVIDERS } from "@angular/http";
 */

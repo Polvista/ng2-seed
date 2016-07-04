@@ -1,4 +1,5 @@
 import { Component, Inject } from '@angular/core';
+import { ROUTER_DIRECTIVES, ActivatedRoute, Router, Event, NavigationEnd } from '@angular/router';
 import {Store} from "../store/Store";
 
 @Component({

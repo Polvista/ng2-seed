@@ -1,5 +1,8 @@
+import {AppRoute} from "../routes/AppRoute";
+
 export interface AppState {
-    reduxTest?: ReduxTestData
+    reduxTest?: ReduxTestData;
+    route?: AppRoute;
 }
 
 export interface SomeData {

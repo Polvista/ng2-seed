@@ -4,10 +4,14 @@ import {ReduxTestsActions} from "../redux/ReduxTestActions";
 import {AppState} from "./AppState";
 import { StateManager } from "./StateManager";
 import {ReduxTestManager} from "../redux/ReduxTestManager";
+import {RouteManager} from "../routes/RouteManager";
 
 export class RootManager {
 
     @StateManager('reduxTest')
     reduxManager = new ReduxTestManager();
+
+    @StateManager('route')
+    routeManager = new RouteManager();
 
 }

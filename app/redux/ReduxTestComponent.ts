@@ -6,7 +6,6 @@ import { AppState } from "../store/AppState";
 import { Store } from "../store/Store";
 import {ReduxTestsActions} from "./ReduxTestActions";
 import {SomeData} from "../store/AppState";
-import {AppService} from "../AppService";
 import {ReduxTestData} from "../store/AppState";
 import {ReduxTestSelectors} from "./ReduxTestSelectors";
 
