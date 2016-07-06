@@ -54,7 +54,13 @@ export class ProxyMutationManager extends MutationManager {
             }
         });
 
-        mutableCopy[CHANGE_WATCHER_PROPERTY] = changeWatcher;
+        Object.defineProperty(mutableCopy, CHANGE_WATCHER_PROPERTY, {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: changeWatcher
+        });
+
         const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, object));
         this.statePartsCache.set(object, mutableCopyProxy);
 
