@@ -2,8 +2,27 @@ import {MutationManager} from "./MutationManager";
 import {AppState} from "../AppState";
 import {Immutable} from "./MutationManager";
 
+
+class ChangeWatcher {
+    private subscribers: (() => void)[] = [];
+
+    subscribe(subscriber: () => void) {
+        this.subscribers.push(subscriber);
+    }
+
+    notifyAboutChange() {
+        if(this.subscribers) {
+            this.subscribers.forEach(subscriber => subscriber());
+            this.subscribers = null; //End of lifecycle
+        }
+    }
+
+}
+
+const CHANGE_WATCHER_PROPERTY = '__CHANGE_WATCHER';
+
 export class ProxyMutationManager extends MutationManager {
-    private statePartsCache: WeakMap<any, any> = new WeakMap<any, any>(); //TODO delete unused objects
+    private statePartsCache: WeakMap<any, any> = new WeakMap<any, any>();
 
     getMutableCopy(state: AppState): AppState {
         super.clearChanges();
@@ -12,28 +31,41 @@ export class ProxyMutationManager extends MutationManager {
             throw new Error('state must be an object');
         }
 
-        return this.getMutableCopyForObject(state, [], []);
+        return this.getMutableCopyForObject(state, []);
     }
 
-    private getMutableCopyForObject(object: any, path: string[], relatedObjects: any[]): any {
+    private getMutableCopyForObject(object: any, path: string[]): any {
         if(this.statePartsCache.has(object)) {
             return this.statePartsCache.get(object);
         }
 
         const mutableCopy = Object.assign({}, object);
+        const changeWatcher = new ChangeWatcher();
         Object.keys(mutableCopy).forEach((propName: string) => {
             if(this.isObject(mutableCopy[propName])) {
-                mutableCopy[propName] = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName], [...relatedObjects, object]);
+                const mutableInnerObject = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName]);
+
+                mutableInnerObject[CHANGE_WATCHER_PROPERTY].subscribe(() => {
+                    this.invalidateCacheForObject(object);
+                    changeWatcher.notifyAboutChange();
+                });
+
+                mutableCopy[propName] = mutableInnerObject;
             }
         });
 
-        const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, [...relatedObjects, object]));
+        mutableCopy[CHANGE_WATCHER_PROPERTY] = changeWatcher;
+        const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, object));
         this.statePartsCache.set(object, mutableCopyProxy);
 
         return mutableCopyProxy;
     }
 
-    private createMutationHandler(path, relatedObjects) {
+    private invalidateCacheForObject(object) {
+        this.statePartsCache.delete(object);
+    }
+
+    private createMutationHandler(path, immutableOriginalObject) {
         const manager = this;
 
         return {
@@ -44,7 +76,8 @@ export class ProxyMutationManager extends MutationManager {
                     val
                 });
 
-                relatedObjects.forEach(relatedObject => manager.statePartsCache.delete(relatedObject));
+                target[CHANGE_WATCHER_PROPERTY].notifyAboutChange();
+                manager.invalidateCacheForObject(immutableOriginalObject);
 
                 target[name] = val;
                 return true;
@@ -56,7 +89,8 @@ export class ProxyMutationManager extends MutationManager {
                     path: [...path, name]
                 });
 
-                relatedObjects.forEach(relatedObject => manager.statePartsCache.delete(relatedObject));
+                target[CHANGE_WATCHER_PROPERTY].notifyAboutChange();
+                manager.invalidateCacheForObject(immutableOriginalObject);
 
                 return true;
             }

@@ -19,8 +19,8 @@ export class ReduxTestManager {
     @OnAction(ReduxTestsActions.INCREMENT)
     increment(reduxTest: ReduxTestData) {
         reduxTest.clicksCount++;
-        delete reduxTest.name;
-        reduxTest.justVal = true;
+        //delete reduxTest.name;
+        //reduxTest.justVal = true;
     }
 
     @OnAction(ReduxTestsActions.ADD_NUM)
