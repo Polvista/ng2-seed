@@ -15,6 +15,9 @@ export class RouteActions extends ActionCreator {
     }
 
     changeRoute(nextRoute: AppRoute) {
-        this.dispatch(RouteActions.CHANGE_ROUTE, nextRoute);
+        const currentRoute = this.store.getState().route;
+        if(!currentRoute || currentRoute.url != nextRoute.url) {
+            this.dispatch(RouteActions.CHANGE_ROUTE, nextRoute);
+        }
     }
 }

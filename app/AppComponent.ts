@@ -1,14 +1,17 @@
 /// <reference path="../typings/tsd.d.ts" />
 /// <reference path="../typings/custom.d.ts" />
 
-import { Component, ElementRef, AfterContentInit, ApplicationRef, OnDestroy } from "@angular/core";
+import { Component, ElementRef, AfterContentInit, ApplicationRef, OnDestroy, OnInit } from "@angular/core";
 import { ROUTER_DIRECTIVES, ActivatedRoute, Router, Event, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { select } from 'ng2-redux';
+import { Observable } from "rxjs";
 import {ReduxTestComponent} from "./redux/ReduxTestComponent";
 import {AppState} from "./store/AppState";
 import {Store} from "./store/Store";
 import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMutations";
 import {RoutesHelper} from "./routes/RoutesHelper";
 import {RouteActions} from "./routes/RouteActions";
+import {AppRoute} from "./routes/AppRoute";
 
 
 @Component({
@@ -28,7 +31,11 @@ import {RouteActions} from "./routes/RouteActions";
     directives: [ROUTER_DIRECTIVES, ImmutableWithMutations],
     providers: [Store, RouteActions]
 })
-export class App implements AfterContentInit, OnDestroy {
+export class App implements AfterContentInit, OnDestroy, OnInit {
+
+    @select()
+    route: Observable<AppRoute>;
+
     constructor(private store: Store,
                 private router: Router,
                 routeActions: RouteActions) {
@@ -39,6 +46,16 @@ export class App implements AfterContentInit, OnDestroy {
                 routeActions.changeRoute(RoutesHelper.getCurrentAppRoute(this.router.routerState.snapshot));
             }
         })
+    }
+
+    ngOnInit() {
+
+        //Synchronize route with state
+        this.route.subscribe((route: AppRoute) => {
+            if(route && this.router.url != route.url) {
+                this.router.navigateByUrl(route.url);
+            }
+        });
     }
 
     ngAfterContentInit() {
