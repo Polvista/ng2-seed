@@ -65,6 +65,6 @@ export class ReduxTestComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
-        this.actions.clear();
+        //this.actions.clear();
     }
 }
