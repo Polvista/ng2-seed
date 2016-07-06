@@ -6,7 +6,7 @@ export interface InnerManagerDescription {
     initialValue: any;
 }
 
-export function StateManager(selector: string, initialValue: any = {}) {
+export function StateManager(selector: string) {
 
     return (target: any, key: string) => {
         function setter(manager) {
@@ -21,8 +21,7 @@ export function StateManager(selector: string, initialValue: any = {}) {
 
             this[PARTS_MANAGERS_PROPERTY].push({
                 selector,
-                manager,
-                initialValue
+                manager
             });
         }
 
