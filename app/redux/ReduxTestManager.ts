@@ -3,9 +3,14 @@ import {ReduxTestData} from "../store/AppState";
 import {PerfUtils} from "./PerfUtils";
 import {AppState} from "../store/AppState";
 import {OnAction, UseReturnValue} from "../store/OnAction";
-
+import { ArrayItemManager } from "../store/ArrayItemManager";
+import {SomeData} from "../store/AppState";
+import {SomeDataManager} from "./SomeDataManager";
 
 export class ReduxTestManager {
+
+    @ArrayItemManager('someArray', (item: SomeData, { id }) => item.id == id)
+    someArrayManager = new SomeDataManager();
 
     @UseReturnValue()
     @OnAction(ReduxTestsActions.INIT_COUNTER)
@@ -23,7 +28,7 @@ export class ReduxTestManager {
         //delete reduxTest.name;
         //reduxTest.justVal = true;
 
-        reduxTest.someArray.push({ id: reduxTest.clicksCount });
+        //reduxTest.someArray.push({ id: reduxTest.clicksCount });
 
     }
 

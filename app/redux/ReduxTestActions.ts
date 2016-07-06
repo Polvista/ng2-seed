@@ -14,6 +14,10 @@ export class ReduxTestsActions extends ActionCreator {
     static INIT_PERF = ReduxTestsActions.typeCreator.type('INIT_PERF');
     static ADD_NUM = ReduxTestsActions.typeCreator.type('ADD_NUM');
     static CLEAR = ReduxTestsActions.typeCreator.type('CLEAR');
+    static SET_ITEM_PAYLOAD = ReduxTestsActions.typeCreator.type('SET_ITEM_PAYLOAD');
+    static CLEAR_PAYLOAD = ReduxTestsActions.typeCreator.type('CLEAR_PAYLOAD');
+    static CHANGE_ITEM = ReduxTestsActions.typeCreator.type('CHANGE_ITEM');
+    static CHANGE_PAYLOAD = ReduxTestsActions.typeCreator.type('CHANGE_PAYLOAD');
 
     constructor(@Inject(forwardRef(() => Store)) store: Store){
         super(store);
@@ -39,6 +43,22 @@ export class ReduxTestsActions extends ActionCreator {
 
     addNum(num: number) {
         this.dispatch(ReduxTestsActions.ADD_NUM, num);
+    }
+
+    setPayload(id: number, payload) {
+        this.dispatch(ReduxTestsActions.SET_ITEM_PAYLOAD, { id, payload });
+    }
+
+    clearPayload(id: number){
+        this.dispatch(ReduxTestsActions.CLEAR_PAYLOAD, { id })
+    }
+
+    changeItem(id: number){
+        this.dispatch(ReduxTestsActions.CHANGE_ITEM, {id});
+    }
+
+    changePayload(id: number) {
+        this.dispatch(ReduxTestsActions.CHANGE_PAYLOAD, {id} );
     }
 
     clear() {

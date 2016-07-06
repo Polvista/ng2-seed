@@ -18,6 +18,10 @@ import {ReduxTestSelectors} from "./ReduxTestSelectors";
         <div>{{ someData | async | json}}</div><button (click)="initPerf()">Init perf</button>
 
         <div>Array: {{ someArray | async | json }}</div>
+        <button (click)="changeArray()">Array change</button>
+        <button (click)="actions.clearPayload(11)">Clear payload in item</button>
+        <button (click)="changeItem()">Change item</button>
+        <button (click)="changePayload()">Change payload</button>
 
         <div>Derived data: {{ clicksAndIds | async }}</div>
 
@@ -62,6 +66,18 @@ export class ReduxTestComponent implements OnDestroy {
 
     getTime() {
         return new Date().toString();
+    }
+
+    changeArray(){
+        this.actions.setPayload(11, { s: 'ss' })
+    }
+
+    changeItem() {
+        this.actions.changeItem(11);
+    }
+
+    changePayload() {
+        this.actions.changePayload(11);
     }
 
     ngOnDestroy() {
