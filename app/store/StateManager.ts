@@ -1,4 +1,4 @@
-export const PARTS_MANAGERS_PROPERTY: string = '__PARTS_MANAGERS__';
+export const PARTS_MANAGERS_PROPERTY: string = '__PARTS_MANAGERS';
 
 export interface InnerManagerDescription {
     selector: string;
@@ -11,7 +11,12 @@ export function StateManager(selector: string, initialValue: any = {}) {
     return (target: any, key: string) => {
         function setter(manager) {
             if(!this[PARTS_MANAGERS_PROPERTY]) {
-                this[PARTS_MANAGERS_PROPERTY] = [];
+                Object.defineProperty(this, PARTS_MANAGERS_PROPERTY, {
+                    enumerable: false,
+                    configurable: false,
+                    writable: false,
+                    value: []
+                });
             }
 
             this[PARTS_MANAGERS_PROPERTY].push({
