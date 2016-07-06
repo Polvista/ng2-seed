@@ -12,7 +12,8 @@ export class ReduxTestManager {
     init() {
         return {
             clicksCount: 0,
-            someData: { id: 10 }
+            someData: { id: 10 },
+            someArray: [ { id: 11 }, { id: 12}, { id: 13 } ]
         }
     }
 
@@ -21,6 +22,9 @@ export class ReduxTestManager {
         reduxTest.clicksCount++;
         //delete reduxTest.name;
         //reduxTest.justVal = true;
+
+        //reduxTest.someArray.sort((d1, d2) => d2.id-d1.id);//push({ id: reduxTest.clicksCount });
+
     }
 
     @OnAction(ReduxTestsActions.ADD_NUM)

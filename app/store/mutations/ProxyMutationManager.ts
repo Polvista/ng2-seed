@@ -39,20 +39,21 @@ export class ProxyMutationManager extends MutationManager {
             return this.statePartsCache.get(object);
         }
 
-        const mutableCopy = Object.assign({}, object);
+        let mutableCopy;
         const changeWatcher = new ChangeWatcher();
-        Object.keys(mutableCopy).forEach((propName: string) => {
-            if(this.isObject(mutableCopy[propName])) {
-                const mutableInnerObject = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName]);
-
-                mutableInnerObject[CHANGE_WATCHER_PROPERTY].subscribe(() => {
-                    this.invalidateCacheForObject(object);
-                    changeWatcher.notifyAboutChange();
-                });
-
-                mutableCopy[propName] = mutableInnerObject;
+        if(this.isObject(object)) {
+            mutableCopy = {};
+            Object.keys(object).forEach((propName: string) => {
+                mutableCopy[propName] = this.getMutableCopyForObjectProperty(object[propName], propName, path, changeWatcher, object);
+            });
+        } else if(this.isArray(object)) {
+            mutableCopy = [];
+            for(let i = 0; i < object.length; i++) {
+                mutableCopy[i] = this.getMutableCopyForObjectProperty(object[i], i.toString(), path, changeWatcher, object);
             }
-        });
+        } else {
+            throw new Error('State must contain only objects and arrays');
+        }
 
         Object.defineProperty(mutableCopy, CHANGE_WATCHER_PROPERTY, {
             enumerable: false,
@@ -65,6 +66,21 @@ export class ProxyMutationManager extends MutationManager {
         this.statePartsCache.set(object, mutableCopyProxy);
 
         return mutableCopyProxy;
+    }
+
+    private getMutableCopyForObjectProperty(property, propertyName: string, path: string[], changeWatcher: ChangeWatcher, immutableOrigObj) {
+        if(this.isObject(property) || this.isArray(property)) {
+            const mutableInnerObject = this.getMutableCopyForObject(property, [...path, propertyName]);
+
+            mutableInnerObject[CHANGE_WATCHER_PROPERTY].subscribe(() => {
+                this.invalidateCacheForObject(immutableOrigObj);
+                changeWatcher.notifyAboutChange();
+            });
+
+            return mutableInnerObject;
+        }
+
+        return property;
     }
 
     private invalidateCacheForObject(object) {

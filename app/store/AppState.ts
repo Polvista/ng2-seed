@@ -7,6 +7,7 @@ export interface AppState {
 
 export interface SomeData {
     id: number;
+    payload?: any;
 }
 
 export interface ReduxTestData {
@@ -15,4 +16,6 @@ export interface ReduxTestData {
     name?: string;
     justVal?: boolean;
     perf?: any;
+
+    someArray?: SomeData[];
 }

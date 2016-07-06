@@ -20,6 +20,10 @@ export abstract class MutationManager {
         return Object.prototype.toString.call(target) === "[object Object]";
     }
 
+    protected isArray(target): boolean {
+        return Object.prototype.toString.call(target) === '[object Array]';
+    }
+
     applyChangesToState(state: AppState): AppState {
         this.changes.forEach(patch => {
             const nextVal = patch.type == 'update' ? patch.val : null;

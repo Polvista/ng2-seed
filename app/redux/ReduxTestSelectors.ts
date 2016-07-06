@@ -23,4 +23,9 @@ export class ReduxTestSelectors {
         (clicksCount, someData: SomeData) => clicksCount + someData.id
     );
 
+    static someArray = nullSafeSelector<SomeData[]>(
+        ReduxTestSelectors.reduxTest,
+        (reduxTest: ReduxTestData) => reduxTest.someArray
+    );
+
 }

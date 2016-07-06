@@ -17,6 +17,8 @@ import {ReduxTestSelectors} from "./ReduxTestSelectors";
         </div>
         <div>{{ someData | async | json}}</div><button (click)="initPerf()">Init perf</button>
 
+        <div>Array: {{ someArray | async | json }}</div>
+
         <div>Derived data: {{ clicksAndIds | async }}</div>
 
         <div>Checked: {{getTime()}}</div>
@@ -35,6 +37,9 @@ export class ReduxTestComponent implements OnDestroy {
 
     @select(ReduxTestSelectors.clicksAndIds)
     clicksAndIds: Observable<number>;
+
+    @select(ReduxTestSelectors.someArray)
+    someArray: Observable<SomeData[]>;
 
     constructor(
         private store: Store,
