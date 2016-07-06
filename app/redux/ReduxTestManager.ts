@@ -23,7 +23,7 @@ export class ReduxTestManager {
         //delete reduxTest.name;
         //reduxTest.justVal = true;
 
-        //reduxTest.someArray.sort((d1, d2) => d2.id-d1.id);//push({ id: reduxTest.clicksCount });
+        reduxTest.someArray.push({ id: reduxTest.clicksCount });
 
     }
 
