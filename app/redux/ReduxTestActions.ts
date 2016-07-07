@@ -29,40 +29,22 @@ export class ReduxTestsActions extends ActionCreator {
         }
     }
 
-    increment() {
-        this.dispatch(ReduxTestsActions.INCREMENT);
-    }
+    increment = () => this.dispatch(ReduxTestsActions.INCREMENT);
 
-    changeData() {
-        this.dispatch(ReduxTestsActions.CHANGE_DATA);
-    }
+    changeData = () => this.dispatch(ReduxTestsActions.CHANGE_DATA);
 
-    initPerf() {
-        this.dispatch(ReduxTestsActions.INIT_PERF);
-    }
+    initPerf = () => this.dispatch(ReduxTestsActions.INIT_PERF);
 
-    addNum(num: number) {
-        this.dispatch(ReduxTestsActions.ADD_NUM, num);
-    }
+    addNum = (num: number) => this.dispatch(ReduxTestsActions.ADD_NUM, num);
 
-    setPayload(id: number, payload) {
-        this.dispatch(ReduxTestsActions.SET_ITEM_PAYLOAD, { id, payload });
-    }
+    setPayload = (id: number, payload) => this.dispatch(ReduxTestsActions.SET_ITEM_PAYLOAD, { id, payload });
 
-    clearPayload(id: number){
-        this.dispatch(ReduxTestsActions.CLEAR_PAYLOAD, { id })
-    }
+    clearPayload = (id: number) => this.dispatch(ReduxTestsActions.CLEAR_PAYLOAD, { id });
 
-    changeItem(id: number){
-        this.dispatch(ReduxTestsActions.CHANGE_ITEM, {id});
-    }
+    changeItem = (id: number) => this.dispatch(ReduxTestsActions.CHANGE_ITEM, {id});
 
-    changePayload(id: number) {
-        this.dispatch(ReduxTestsActions.CHANGE_PAYLOAD, {id} );
-    }
+    changePayload = (id: number) => this.dispatch(ReduxTestsActions.CHANGE_PAYLOAD, {id} );
 
-    clear() {
-        this.dispatch(ReduxTestsActions.CLEAR);
-    }
+    clear = () => this.dispatch(ReduxTestsActions.CLEAR);
 }
 

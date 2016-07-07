@@ -52,32 +52,20 @@ export class ReduxTestComponent implements OnDestroy {
         this.actions.init();
     }
 
-    onClick() {
-        this.actions.increment();
-    }
+    onClick = this.actions.increment;
 
-    add(num: number) {
-        this.actions.addNum(num);
-    }
+    add = (num: number) => this.actions.addNum(num);
 
-    initPerf() {
-        this.actions.initPerf();
-    }
+    initPerf = this.actions.initPerf;
+
+    changeArray = () => this.actions.setPayload(11, { s: 'ss' });
+
+    changeItem = () => this.actions.changeItem(11);
+
+    changePayload = () => this.actions.changePayload(11);
 
     getTime() {
         return new Date().toString();
-    }
-
-    changeArray(){
-        this.actions.setPayload(11, { s: 'ss' })
-    }
-
-    changeItem() {
-        this.actions.changeItem(11);
-    }
-
-    changePayload() {
-        this.actions.changePayload(11);
     }
 
     ngOnDestroy() {
