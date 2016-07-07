@@ -9,6 +9,8 @@ export interface InnerManagerDescription {
 export function StateManager(selector: string) {
 
     return (target: any, key: string) => {
+        let stateManager;
+
         function setter(manager) {
             if(!this[PARTS_MANAGERS_PROPERTY]) {
                 Object.defineProperty(this, PARTS_MANAGERS_PROPERTY, {
@@ -23,10 +25,17 @@ export function StateManager(selector: string) {
                 selector,
                 manager
             });
+
+            stateManager = manager;
+        }
+
+        function getter(){
+            return stateManager;
         }
 
         if (delete this[key]) {
             Object.defineProperty(target, key, {
+                get: getter,
                 set: setter,
                 enumerable: true,
                 configurable: true

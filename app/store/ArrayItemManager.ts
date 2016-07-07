@@ -13,6 +13,8 @@ export interface ItemSelector {
 export function ArrayItemManager(propertySelector: string, itemSelector: ItemSelector) {
 
     return (target: any, key: string) => {
+        let arrayManager;
+
         function setter(manager) {
             if(!this[ARRAY_ITEM_MANAGERS_PROPERTY]) {
                 Object.defineProperty(this, ARRAY_ITEM_MANAGERS_PROPERTY, {
@@ -30,10 +32,17 @@ export function ArrayItemManager(propertySelector: string, itemSelector: ItemSel
             };
 
             this[ARRAY_ITEM_MANAGERS_PROPERTY].push(managerDescription);
+
+            arrayManager = manager;
+        }
+
+        function getter(){
+            return arrayManager;
         }
 
         if (delete this[key]) {
             Object.defineProperty(target, key, {
+                get: getter,
                 set: setter,
                 enumerable: true,
                 configurable: true
