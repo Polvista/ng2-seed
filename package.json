@@ -54,6 +54,7 @@
     "to-string-loader": "^1.1.4",
     "traceur": "0.0.110",
     "ts-loader": "^0.8.2",
+    "tslint-loader": "^2.1.5",
     "typescript": "^1.9.0-dev.20160409",
     "webpack": "^1.13.1",
     "webpack-merge": "^0.14.0",
@@ -63,6 +64,7 @@
     "concurrently": "1.0.0",
     "html-webpack-plugin": "^2.21.0",
     "live-server": "0.9.0",
+    "tslint": "^3.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-md5-hash": "0.0.5"
   },

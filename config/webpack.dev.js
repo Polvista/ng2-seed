@@ -41,6 +41,12 @@ module.exports = webpackMerge(commonConfig, {
         /*hot: true,*/
         inline: true,
         progress: true
+    },
+
+    tslint: {
+        emitErrors: true,
+
+        failOnHint: false
     }
 
 });

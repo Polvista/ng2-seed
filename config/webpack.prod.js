@@ -54,7 +54,13 @@ module.exports = webpackMerge(commonConfig, {
             /angular2-hmr/,
             path.join(__dirname, 'angular2-hmr-prod.js')
         )
-    ]
+    ],
+
+    tslint: {
+        emitErrors: true,
+
+        failOnHint: true
+    }
 
 });
 

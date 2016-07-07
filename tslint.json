@@ -1,0 +1,6 @@
+{
+    "rules": {
+        "class-name": true,
+        "no-eval": true
+    }
+}
