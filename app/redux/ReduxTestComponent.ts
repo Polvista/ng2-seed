@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject, forwardRef, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, AfterContentChecked, Inject, forwardRef, OnDestroy, OnInit } from '@angular/core';
 import { select } from 'ng2-redux';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Action } from 'redux';
 import { AppState } from "../store/AppState";
 import { Store } from "../store/Store";
@@ -8,6 +8,9 @@ import {ReduxTestsActions} from "./ReduxTestActions";
 import {SomeData} from "../store/AppState";
 import {ReduxTestData} from "../store/AppState";
 import {ReduxTestSelectors} from "./ReduxTestSelectors";
+import {AppRoute} from "../routes/AppRoute";
+import {RouterService} from "../routes/RouterService";
+import {NextRoute} from "../routes/RouterService";
 
 @Component({
     selector: 'redux-test',
@@ -31,7 +34,7 @@ import {ReduxTestSelectors} from "./ReduxTestSelectors";
     providers: [ReduxTestsActions],
     styleUrls: ['reduxTest.scss']
 })
-export class ReduxTestComponent implements OnDestroy {
+export class ReduxTestComponent implements OnDestroy, OnInit {
 
     @select(ReduxTestSelectors.clicksCount)
     clicksCount: Observable<number>;
@@ -45,12 +48,28 @@ export class ReduxTestComponent implements OnDestroy {
     @select(ReduxTestSelectors.someArray)
     someArray: Observable<SomeData[]>;
 
+    routeSubscription: Subscription;
+
     constructor(
         private store: Store,
-        private actions: ReduxTestsActions) {
+        private actions: ReduxTestsActions,
+        private routerService: RouterService) {
 
         this.actions.init();
+
+        this.routeSubscription = this.routerService.routeChanges.subscribe(this.actions.clear);
     }
+
+    ngOnInit() {
+        /*this.routeSubscription = this.store.select('route').subscribe((route: AppRoute) => {
+            console.log(route);
+
+            /!*if(!route.prevRoute || route.prevRoute.url != route.url) {
+                this.actions.clear();
+            }*!/
+        });*/
+    }
+
 
     onClick = this.actions.increment;
 
@@ -69,6 +88,7 @@ export class ReduxTestComponent implements OnDestroy {
     }
 
     ngOnDestroy() {
+        this.routeSubscription.unsubscribe();
         //this.actions.clear();
     }
 }

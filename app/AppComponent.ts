@@ -12,6 +12,7 @@ import {ImmutableWithMutations} from "./immutable/withMutations/ImmutableWithMut
 import {RoutesHelper} from "./routes/RoutesHelper";
 import {RouteActions} from "./routes/RouteActions";
 import {AppRoute} from "./routes/AppRoute";
+import {RouterService} from "./routes/RouterService";
 
 
 @Component({
@@ -29,7 +30,7 @@ import {AppRoute} from "./routes/AppRoute";
         </immutable-with-mutations>
     `,
     directives: [ROUTER_DIRECTIVES, ImmutableWithMutations],
-    providers: [Store, RouteActions]
+    providers: [Store, RouteActions, RouterService]
 })
 export class App implements AfterContentInit, OnDestroy, OnInit {
 
