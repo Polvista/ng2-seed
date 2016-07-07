@@ -1,6 +1,11 @@
 {
+    "rulesDirectory": [
+        "node_modules/codelyzer"
+    ],
     "rules": {
         "class-name": true,
-        "no-eval": true
+        "no-eval": true,
+
+        "use-life-cycle-interface": true
     }
 }

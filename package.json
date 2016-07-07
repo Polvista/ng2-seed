@@ -61,6 +61,7 @@
     "zone.js": "0.6.12"
   },
   "devDependencies": {
+    "codelyzer": "0.0.25",
     "concurrently": "1.0.0",
     "html-webpack-plugin": "^2.21.0",
     "live-server": "0.9.0",
