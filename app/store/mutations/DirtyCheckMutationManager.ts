@@ -3,42 +3,8 @@ import {AppState} from "../AppState";
 
 export class DirtyCheckMutationManager extends MutationManager {
 
-    getMutableCopy(state: AppState): AppState {
-        super.clearChanges();
-        return this.getMutableCopyForObject(state, []);
-    }
-
-    private getMutableCopyForObject(object: any, path: string[]): any {
-        if(this.objectsCache.hasObject(object)) {
-            return this.objectsCache.getValue(object);
-        }
-
-        let mutableCopy;
-        if(this.isObject(object)) {
-            mutableCopy = {};
-            Object.keys(object).forEach((propName: string) => {
-                mutableCopy[propName] = this.getMutableCopyForObjectProperty(object[propName], propName, path);
-            });
-        } else if(this.isArray(object)) {
-            mutableCopy = [];
-            for(let i = 0; i < object.length; i++) {
-                mutableCopy[i] = this.getMutableCopyForObjectProperty(object[i], i.toString(), path);
-            }
-        } else {
-            throw new Error('State must contain only objects and arrays');
-        }
-
-        this.objectsCache.saveObject(object, mutableCopy);
-
-        return mutableCopy;
-    }
-
-    private getMutableCopyForObjectProperty(property, propertyName: string, path: string[]) {
-        if(this.isObject(property) || this.isArray(property)) {
-            return this.getMutableCopyForObject(property, [...path, propertyName]);
-        }
-
-        return property;
+    protected enhanceMutableObject(mutableObject: any, origObject: any, path: string[]): any {
+        return mutableObject;
     }
 
     synchronizeState(state: AppState, mutatedState: AppState): AppState {
@@ -70,7 +36,7 @@ export class DirtyCheckMutationManager extends MutationManager {
                         val: mutatedObjValue
                     });
 
-                    this.objectsCache.deleteObject(orig);
+                    this.clearCacheForObject(orig, mutated);
                 } else if(typeOfMutatedObjValue === "[object String]" ||
                           typeOfMutatedObjValue === "[object Number]" ||
                           typeOfMutatedObjValue === "[object Boolean]") {
@@ -83,7 +49,7 @@ export class DirtyCheckMutationManager extends MutationManager {
                             val: mutatedObjValue
                         });
 
-                        this.objectsCache.deleteObject(orig);
+                        this.clearCacheForObject(orig, mutated);
                     }
                 } else if(typeOfMutatedObjValue === "[object Object]" || typeOfMutatedObjValue === "[object Array]") {
                     this.findChangesForObjects(origObjValue, mutatedObjValue, [...path, mutatedObjProperty]);
@@ -98,13 +64,13 @@ export class DirtyCheckMutationManager extends MutationManager {
                     val: mutated[mutatedObjProperty]
                 });
 
-                this.objectsCache.deleteObject(orig);
+                this.clearCacheForObject(orig, mutated);
             }
 
         });
 
         if(origObjProperties.length) {
-            this.objectsCache.deleteObject(orig);
+            this.clearCacheForObject(orig, mutated);
 
             origObjProperties.forEach(origProperty => {
                 //deleted property
@@ -115,5 +81,16 @@ export class DirtyCheckMutationManager extends MutationManager {
             });
         }
 
+    }
+
+    private clearCacheForObject(orig:any, mutated: any) {
+        if(mutated[MutationManager.CHANGE_WATCHER_PROPERTY]) {
+            mutated[MutationManager.CHANGE_WATCHER_PROPERTY].notifyAboutChange();
+        } else {
+            //new object setted, take old one and notify parents about change
+            this.objectsCache.getValue(orig)[MutationManager.CHANGE_WATCHER_PROPERTY].notifyAboutChange();
+        }
+
+        this.invalidateCacheForObject(orig);
     }
 }

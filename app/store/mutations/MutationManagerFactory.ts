@@ -1,5 +1,5 @@
 import {MutationManager} from "./MutationManager";
-import {Es5MutationManager} from "./FullCheckMutationManager";
+import {DirtyCheckMutationManager} from "./DirtyCheckMutationManager";
 import {ProxyMutationManager} from "./ProxyMutationManager";
 
 export class MutationManagerFactory {
@@ -11,7 +11,7 @@ export class MutationManagerFactory {
             if(typeof Proxy !== "undefined") {
                 MutationManagerFactory.INSTANCE = new ProxyMutationManager();
             } else {
-                MutationManagerFactory.INSTANCE = new Es5MutationManager();
+                MutationManagerFactory.INSTANCE = new DirtyCheckMutationManager();
             }
 
         }

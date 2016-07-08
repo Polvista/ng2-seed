@@ -28,7 +28,7 @@ export class ReduxTestManager {
         //delete reduxTest.name;
         //reduxTest.justVal = true;
 
-        //reduxTest.someArray.push({ id: reduxTest.clicksCount });
+        reduxTest.someArray.push({ id: reduxTest.clicksCount });
 
     }
 
