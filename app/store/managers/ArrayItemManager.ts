@@ -10,7 +10,7 @@ export interface ItemSelector {
     (item, payload?, actionTypeString?: string): boolean;
 }
 
-export function ArrayItemManager(propertySelector: string, itemSelector: ItemSelector) {
+export function arrayItemManager(propertySelector: string, itemSelector: ItemSelector) {
 
     return (target: any, key: string) => {
         let arrayManager;

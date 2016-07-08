@@ -1,9 +1,9 @@
-import {OnAction, UseReturnValue} from "../store/managers/OnAction";
+import {action, useReturnValue} from "../store/managers/OnAction";
 import {ReduxTestsActions} from "./ReduxTestActions";
 
 export class PayloadManager {
 
-    @OnAction(ReduxTestsActions.CHANGE_PAYLOAD)
+    @action(ReduxTestsActions.CHANGE_PAYLOAD)
     updatePayload(payload) {
         payload.updated = true;
     }

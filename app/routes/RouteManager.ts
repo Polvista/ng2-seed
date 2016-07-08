@@ -1,11 +1,11 @@
-import {OnAction, UseReturnValue} from "../store/managers/OnAction";
+import {action, useReturnValue} from "../store/managers/OnAction";
 import {RouteActions} from "./RouteActions";
 import {AppRoute} from "./AppRoute";
 
 export class RouteManager {
 
-    @UseReturnValue()
-    @OnAction(RouteActions.CHANGE_ROUTE)
+    @useReturnValue()
+    @action(RouteActions.CHANGE_ROUTE)
     changeRoute(currentRoute: AppRoute, nextRoute: AppRoute) {
         if(currentRoute) {
             currentRoute.prevRoute = null;

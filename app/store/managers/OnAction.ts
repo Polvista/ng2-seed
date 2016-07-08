@@ -2,7 +2,7 @@ import {ActionType, getActionTypeString} from "./../actions/ActionType";
 export const ACTIONS_MAP_PROPERTY: string = '__ACTIONS_MAP';
 export const RETURN_VALUES_METHODS_PROPERTY: string = '__RETURN_VALUES_METHODS';
 
-export function OnAction(...actionTypes: (string | ActionType)[]) {
+export function action(...actionTypes: (string | ActionType)[]) {
 
     return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
         if(!target[ACTIONS_MAP_PROPERTY]) {
@@ -32,7 +32,7 @@ export function OnAction(...actionTypes: (string | ActionType)[]) {
 
 }
 
-export function UseReturnValue() {
+export function useReturnValue() {
 
     return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
         if(!target[RETURN_VALUES_METHODS_PROPERTY]) {

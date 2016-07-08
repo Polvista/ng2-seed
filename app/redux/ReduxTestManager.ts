@@ -2,18 +2,18 @@ import {ReduxTestsActions} from "./ReduxTestActions";
 import {ReduxTestData} from "../store/AppState";
 import {PerfUtils} from "./PerfUtils";
 import {AppState} from "../store/AppState";
-import {OnAction, UseReturnValue} from "../store/managers/OnAction";
-import { ArrayItemManager } from "../store/managers/ArrayItemManager";
+import {action, useReturnValue} from "../store/managers/OnAction";
+import { arrayItemManager } from "../store/managers/ArrayItemManager";
 import {SomeData} from "../store/AppState";
 import {SomeDataManager} from "./SomeDataManager";
 
 export class ReduxTestManager {
 
-    @ArrayItemManager('someArray', (item: SomeData, { id }) => item.id == id)
+    @arrayItemManager('someArray', (item: SomeData, { id }) => item.id == id)
     someArrayManager = new SomeDataManager();
 
-    @UseReturnValue()
-    @OnAction(ReduxTestsActions.INIT_COUNTER)
+    @useReturnValue()
+    @action(ReduxTestsActions.INIT_COUNTER)
     init() {
         return {
             clicksCount: 0,
@@ -22,7 +22,7 @@ export class ReduxTestManager {
         }
     }
 
-    @OnAction(ReduxTestsActions.INCREMENT)
+    @action(ReduxTestsActions.INCREMENT)
     increment(reduxTest: ReduxTestData) {
         reduxTest.clicksCount++;
         //delete reduxTest.name;
@@ -32,18 +32,18 @@ export class ReduxTestManager {
 
     }
 
-    @OnAction(ReduxTestsActions.ADD_NUM)
+    @action(ReduxTestsActions.ADD_NUM)
     addNum(reduxTest: ReduxTestData, num: number) {
         reduxTest.clicksCount += num;
     }
 
-    @OnAction(ReduxTestsActions.INIT_PERF)
+    @action(ReduxTestsActions.INIT_PERF)
     initPerf(reduxTest: ReduxTestData) {
         reduxTest.perf = PerfUtils.generateBigState();
     }
 
-    @UseReturnValue()
-    @OnAction(ReduxTestsActions.CLEAR)
+    @useReturnValue()
+    @action(ReduxTestsActions.CLEAR)
     clear() {
         return null;
     }
