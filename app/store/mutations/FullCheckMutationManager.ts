@@ -2,7 +2,6 @@ import {MutationManager} from "./MutationManager";
 import {AppState} from "../AppState";
 
 export class Es5MutationManager extends MutationManager {
-    private statePartsCache: WeakMap<any, any> = new WeakMap<any, any>();
 
     getMutableCopy(state: AppState): AppState {
         super.clearChanges();
@@ -10,8 +9,8 @@ export class Es5MutationManager extends MutationManager {
     }
 
     private getMutableCopyForObject(object: any, path: string[]): any {
-        if(this.statePartsCache.has(object)) {
-            return this.statePartsCache.get(object);
+        if(this.objectsCache.hasObject(object)) {
+            return this.objectsCache.getValue(object);
         }
 
         const mutableCopy = Object.assign({}, object);
@@ -21,7 +20,7 @@ export class Es5MutationManager extends MutationManager {
             }
         });
 
-        this.statePartsCache.set(object, mutableCopy);
+        this.objectsCache.saveObject(object, mutableCopy);
 
         return mutableCopy;
     }
@@ -55,7 +54,7 @@ export class Es5MutationManager extends MutationManager {
                         val: mutatedObjValue
                     });
 
-                    this.statePartsCache.delete(orig);
+                    this.objectsCache.deleteObject(orig);
                 } else if(typeOfMutatedObjValue === "[object String]" ||
                           typeOfMutatedObjValue === "[object Number]" ||
                           typeOfMutatedObjValue === "[object Boolean]") {
@@ -68,7 +67,7 @@ export class Es5MutationManager extends MutationManager {
                             val: mutatedObjValue
                         });
 
-                        this.statePartsCache.delete(orig);
+                        this.objectsCache.deleteObject(orig);
                     }
                 } else if(typeOfMutatedObjValue === "[object Object]") {
                     this.findChangesForObjects(origObjValue, mutatedObjValue, [...path, mutatedObjProperty]);
@@ -83,13 +82,13 @@ export class Es5MutationManager extends MutationManager {
                     val: mutated[mutatedObjProperty]
                 });
 
-                this.statePartsCache.delete(orig);
+                this.objectsCache.deleteObject(orig);
             }
 
         });
 
         if(origObjProperties.length) {
-            this.statePartsCache.delete(orig);
+            this.objectsCache.deleteObject(orig);
 
             origObjProperties.forEach(origProperty => {
                 //deleted property

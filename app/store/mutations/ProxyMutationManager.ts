@@ -22,7 +22,6 @@ class ChangeWatcher {
 const CHANGE_WATCHER_PROPERTY = '__CHANGE_WATCHER';
 
 export class ProxyMutationManager extends MutationManager {
-    private statePartsCache: WeakMap<any, any> = new WeakMap<any, any>();
 
     getMutableCopy(state: AppState): AppState {
         super.clearChanges();
@@ -35,8 +34,8 @@ export class ProxyMutationManager extends MutationManager {
     }
 
     private getMutableCopyForObject(object: any, path: string[]): any {
-        if(this.statePartsCache.has(object)) {
-            return this.statePartsCache.get(object);
+        if(this.objectsCache.hasObject(object)) {
+            return this.objectsCache.getValue(object);
         }
 
         let mutableCopy;
@@ -63,7 +62,7 @@ export class ProxyMutationManager extends MutationManager {
         });
 
         const mutableCopyProxy = new Proxy(mutableCopy, this.createMutationHandler(path, object));
-        this.statePartsCache.set(object, mutableCopyProxy);
+        this.objectsCache.saveObject(object, mutableCopyProxy);
 
         return mutableCopyProxy;
     }
@@ -84,7 +83,7 @@ export class ProxyMutationManager extends MutationManager {
     }
 
     private invalidateCacheForObject(object) {
-        this.statePartsCache.delete(object);
+        this.objectsCache.deleteObject(object);
     }
 
     private createMutationHandler(path, immutableOriginalObject) {

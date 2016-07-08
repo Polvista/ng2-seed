@@ -1,4 +1,6 @@
 import {AppState} from "./../AppState";
+import {StateObjectsCache} from "./stateObjectsCache/StateObjectsCache";
+import {StateObjectCacheFactory} from "./stateObjectsCache/StateObjectCacheFactory";
 
 interface Patch {
     type: string;
@@ -7,7 +9,12 @@ interface Patch {
 }
 
 export abstract class MutationManager {
+    protected objectsCache: StateObjectsCache;
     protected changes: Patch[];
+
+    constructor() {
+        this.objectsCache = StateObjectCacheFactory.getObjectsCache();
+    }
 
     abstract getMutableCopy(state: AppState): AppState;
     abstract synchronizeState(state: AppState, mutatedState: AppState): AppState;
