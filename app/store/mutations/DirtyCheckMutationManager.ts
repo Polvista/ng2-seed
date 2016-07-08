@@ -1,7 +1,7 @@
 import {MutationManager} from "./MutationManager";
 import {AppState} from "../AppState";
 
-export class Es5MutationManager extends MutationManager {
+export class DirtyCheckMutationManager extends MutationManager {
 
     getMutableCopy(state: AppState): AppState {
         super.clearChanges();
@@ -13,16 +13,32 @@ export class Es5MutationManager extends MutationManager {
             return this.objectsCache.getValue(object);
         }
 
-        const mutableCopy = Object.assign({}, object);
-        Object.keys(mutableCopy).forEach((propName: string) => {
-            if(this.isObject(mutableCopy[propName])) {
-                mutableCopy[propName] = this.getMutableCopyForObject(mutableCopy[propName], [...path, propName]);
+        let mutableCopy;
+        if(this.isObject(object)) {
+            mutableCopy = {};
+            Object.keys(object).forEach((propName: string) => {
+                mutableCopy[propName] = this.getMutableCopyForObjectProperty(object[propName], propName, path);
+            });
+        } else if(this.isArray(object)) {
+            mutableCopy = [];
+            for(let i = 0; i < object.length; i++) {
+                mutableCopy[i] = this.getMutableCopyForObjectProperty(object[i], i.toString(), path);
             }
-        });
+        } else {
+            throw new Error('State must contain only objects and arrays');
+        }
 
         this.objectsCache.saveObject(object, mutableCopy);
 
         return mutableCopy;
+    }
+
+    private getMutableCopyForObjectProperty(property, propertyName: string, path: string[]) {
+        if(this.isObject(property) || this.isArray(property)) {
+            return this.getMutableCopyForObject(property, [...path, propertyName]);
+        }
+
+        return property;
     }
 
     synchronizeState(state: AppState, mutatedState: AppState): AppState {
@@ -69,7 +85,7 @@ export class Es5MutationManager extends MutationManager {
 
                         this.objectsCache.deleteObject(orig);
                     }
-                } else if(typeOfMutatedObjValue === "[object Object]") {
+                } else if(typeOfMutatedObjValue === "[object Object]" || typeOfMutatedObjValue === "[object Array]") {
                     this.findChangesForObjects(origObjValue, mutatedObjValue, [...path, mutatedObjProperty]);
                 }
 
