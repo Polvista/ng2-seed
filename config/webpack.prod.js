@@ -59,7 +59,7 @@ module.exports = webpackMerge(commonConfig, {
     tslint: {
         emitErrors: true,
 
-        failOnHint: true
+        failOnHint: false
     }
 
 });
