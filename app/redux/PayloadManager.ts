@@ -1,4 +1,4 @@
-import {OnAction, UseReturnValue} from "../store/OnAction";
+import {OnAction, UseReturnValue} from "../store/managers/OnAction";
 import {ReduxTestsActions} from "./ReduxTestActions";
 
 export class PayloadManager {

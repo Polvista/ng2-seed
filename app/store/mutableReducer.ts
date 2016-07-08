@@ -6,10 +6,10 @@ import {PerfUtils} from "./../redux/PerfUtils";
 import {ReduxTestManager} from "../redux/ReduxTestManager";
 import {Action} from "./actions/Action";
 import {RootManager} from "./RootManager";
-import {PARTS_MANAGERS_PROPERTY, InnerManagerDescription} from "./StateManager";
-import {ACTIONS_MAP_PROPERTY, RETURN_VALUES_METHODS_PROPERTY} from "./OnAction";
+import {PARTS_MANAGERS_PROPERTY, InnerManagerDescription} from "./managers/StateManager";
+import {ACTIONS_MAP_PROPERTY, RETURN_VALUES_METHODS_PROPERTY} from "./managers/OnAction";
 import {ActionType, getActionTypeString} from "./actions/ActionType";
-import {ArrayItemManagerDescription, ARRAY_ITEM_MANAGERS_PROPERTY} from "./ArrayItemManager";
+import {ArrayItemManagerDescription, ARRAY_ITEM_MANAGERS_PROPERTY} from "./managers/ArrayItemManager";
 
 const rootManager: RootManager = new RootManager();
 

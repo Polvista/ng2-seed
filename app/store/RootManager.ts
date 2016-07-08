@@ -2,7 +2,7 @@ import {PerfUtils} from "../redux/PerfUtils";
 import {ReduxTestData} from "./AppState";
 import {ReduxTestsActions} from "../redux/ReduxTestActions";
 import {AppState} from "./AppState";
-import { StateManager } from "./StateManager";
+import { StateManager } from "./managers/StateManager";
 import {ReduxTestManager} from "../redux/ReduxTestManager";
 import {RouteManager} from "../routes/RouteManager";
 

@@ -1,7 +1,7 @@
-import {OnAction, UseReturnValue} from "../store/OnAction";
+import {OnAction, UseReturnValue} from "../store/managers/OnAction";
 import {ReduxTestsActions} from "./ReduxTestActions";
 import {SomeData} from "../store/AppState";
-import { StateManager } from "../store/StateManager";
+import { StateManager } from "../store/managers/StateManager";
 import {PayloadManager} from "./PayloadManager";
 
 export class SomeDataManager {

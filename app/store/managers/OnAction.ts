@@ -1,4 +1,4 @@
-import {ActionType, getActionTypeString} from "./actions/ActionType";
+import {ActionType, getActionTypeString} from "./../actions/ActionType";
 export const ACTIONS_MAP_PROPERTY: string = '__ACTIONS_MAP';
 export const RETURN_VALUES_METHODS_PROPERTY: string = '__RETURN_VALUES_METHODS';
 
