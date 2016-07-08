@@ -1,5 +1,5 @@
 import { AppState } from "../store/AppState";
-import { selector, nullSafeSelector, nullSafe } from '../store/selector';
+import { selector, nullSafeSelector, nullSafe } from '../store/selectors/selector';
 import {SomeData} from "../store/AppState";
 import {ReduxTestData} from "../store/AppState";
 

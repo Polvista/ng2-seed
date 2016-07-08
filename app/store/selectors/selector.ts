@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
-import { AppState } from "./AppState";
-import { ReduxTestData } from "./AppState";
+import { AppState } from "./../AppState";
+import { ReduxTestData } from "./../AppState";
 const Immutable = require('seamless-immutable');
 
 export function selector<Output>(...params: any[]): (state: AppState) => Output {
