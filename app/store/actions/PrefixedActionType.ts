@@ -1,7 +1,7 @@
 import {ActionType} from "./ActionType";
 
 export class PrefixedActionType implements ActionType {
-    private static DELIMITER = '::';
+    private static DELIMITER = ' :: ';
 
     constructor(private prefix: string, private type: string) {}
 

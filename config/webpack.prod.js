@@ -60,6 +60,13 @@ module.exports = webpackMerge(commonConfig, {
         emitErrors: true,
 
         failOnHint: false
+    },
+
+    resolve: {
+        alias: {
+            //'seamless-immutable': path.resolve(__dirname, '../node_modules/seamless-immutable/seamless-immutable.production.min.js'),
+            'redux': path.resolve(__dirname, '../node_modules/redux/dist/redux.min.js')
+        }
     }
 
 });
