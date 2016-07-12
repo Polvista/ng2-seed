@@ -2,16 +2,16 @@ import {PerfUtils} from "../redux/PerfUtils";
 import {ReduxTestData} from "./AppState";
 import {ReduxTestsActions} from "../redux/ReduxTestActions";
 import {AppState} from "./AppState";
-import { stateManager } from "./managers/StateManager";
+import { manager } from "./managers/manager";
 import {ReduxTestManager} from "../redux/ReduxTestManager";
 import {RouteManager} from "../routes/RouteManager";
 
 export class RootManager {
 
-    @stateManager('reduxTest')
+    @manager('reduxTest')
     reduxManager = new ReduxTestManager();
 
-    @stateManager('route')
+    @manager('route')
     routeManager = new RouteManager();
 
 }

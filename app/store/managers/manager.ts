@@ -6,7 +6,7 @@ export interface InnerManagerDescription {
     initialValue: any;
 }
 
-export function stateManager(selector: string) {
+export function manager(selector: string) {
 
     return (target: any, key: string) => {
         let stateManager;

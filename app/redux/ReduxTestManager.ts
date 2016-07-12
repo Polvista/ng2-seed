@@ -2,8 +2,8 @@ import {ReduxTestsActions} from "./ReduxTestActions";
 import {ReduxTestData} from "../store/AppState";
 import {PerfUtils} from "./PerfUtils";
 import {AppState} from "../store/AppState";
-import {action, useReturnValue} from "../store/managers/OnAction";
-import { arrayItemManager } from "../store/managers/ArrayItemManager";
+import {action, useReturnValue} from "../store/managers/action";
+import { arrayItemManager } from "../store/managers/arrayItemManager";
 import {SomeData} from "../store/AppState";
 import {SomeDataManager} from "./SomeDataManager";
 

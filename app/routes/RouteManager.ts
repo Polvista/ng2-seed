@@ -1,4 +1,4 @@
-import {action, useReturnValue} from "../store/managers/OnAction";
+import {action, useReturnValue} from "../store/managers/action";
 import {RouteActions} from "./RouteActions";
 import {AppRoute} from "./AppRoute";
 

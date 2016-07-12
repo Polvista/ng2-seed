@@ -1,12 +1,12 @@
-import {action, useReturnValue} from "../store/managers/OnAction";
+import {action, useReturnValue} from "../store/managers/action";
 import {ReduxTestsActions} from "./ReduxTestActions";
 import {SomeData} from "../store/AppState";
-import { stateManager } from "../store/managers/StateManager";
+import { manager } from "../store/managers/manager";
 import {PayloadManager} from "./PayloadManager";
 
 export class SomeDataManager {
 
-    @stateManager('payload')
+    @manager('payload')
     payloadManager = new PayloadManager();
 
     @action(ReduxTestsActions.SET_ITEM_PAYLOAD)
