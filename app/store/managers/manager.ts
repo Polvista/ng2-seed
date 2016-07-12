@@ -12,8 +12,8 @@ export function manager(selector: string) {
         let stateManager;
 
         function setter(manager) {
-            if(!this[PARTS_MANAGERS_PROPERTY]) {
-                Object.defineProperty(this, PARTS_MANAGERS_PROPERTY, {
+            if(!target[PARTS_MANAGERS_PROPERTY]) {
+                Object.defineProperty(target, PARTS_MANAGERS_PROPERTY, {
                     enumerable: false,
                     configurable: false,
                     writable: false,
@@ -21,7 +21,7 @@ export function manager(selector: string) {
                 });
             }
 
-            this[PARTS_MANAGERS_PROPERTY].push({
+            target[PARTS_MANAGERS_PROPERTY].push({
                 selector,
                 manager
             });
@@ -33,7 +33,7 @@ export function manager(selector: string) {
             return stateManager;
         }
 
-        if (delete this[key]) {
+        if (delete target[key]) {
             Object.defineProperty(target, key, {
                 get: getter,
                 set: setter,
