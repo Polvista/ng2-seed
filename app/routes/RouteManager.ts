@@ -4,7 +4,7 @@ import {AppRoute} from "./AppRoute";
 
 export class RouteManager {
 
-    @useReturnValue()
+    @useReturnValue
     @action(RouteActions.CHANGE_ROUTE)
     changeRoute(currentRoute: AppRoute, nextRoute: AppRoute) {
         if(currentRoute) {

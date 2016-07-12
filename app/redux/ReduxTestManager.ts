@@ -12,7 +12,7 @@ export class ReduxTestManager {
     @arrayItemManager('someArray', (item: SomeData, { id }) => item.id == id)
     someArrayManager = new SomeDataManager();
 
-    @useReturnValue()
+    @useReturnValue
     @action(ReduxTestsActions.INIT_COUNTER)
     init() {
         return {
@@ -42,7 +42,7 @@ export class ReduxTestManager {
         reduxTest.perf = PerfUtils.generateBigState();
     }
 
-    @useReturnValue()
+    @useReturnValue
     @action(ReduxTestsActions.CLEAR)
     clear() {
         return null;

@@ -32,21 +32,17 @@ export function action(...actionTypes: (string | ActionType)[]) {
 
 }
 
-export function useReturnValue() {
-
-    return (target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) => {
-        if(!target[RETURN_VALUES_METHODS_PROPERTY]) {
-            Object.defineProperty(target, RETURN_VALUES_METHODS_PROPERTY, {
-                enumerable: false,
-                configurable: false,
-                writable: false,
-                value: []
-            });
-        }
-
-        target[RETURN_VALUES_METHODS_PROPERTY].push(propertyKey);
-
-        return descriptor;
+export function useReturnValue(target: Object, propertyKey: string, descriptor: TypedPropertyDescriptor<any>) {
+    if(!target[RETURN_VALUES_METHODS_PROPERTY]) {
+        Object.defineProperty(target, RETURN_VALUES_METHODS_PROPERTY, {
+            enumerable: false,
+            configurable: false,
+            writable: false,
+            value: []
+        });
     }
 
+    target[RETURN_VALUES_METHODS_PROPERTY].push(propertyKey);
+
+    return descriptor;
 }

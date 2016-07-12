@@ -20,7 +20,7 @@ export class SomeDataManager {
         someData.payload = null;
     }
 
-    @useReturnValue()
+    @useReturnValue
     @action(ReduxTestsActions.CHANGE_ITEM)
     changeItem(someData: SomeData): SomeData {
         return {
