@@ -7,6 +7,7 @@ import { Action } from "./actions/Action";
 import { AppState } from "./AppState";
 import { rootMutableReducer } from './mutableReducer';
 import { actionTypesSupport } from "./middlewares/actionTypesSupport";
+import { promiseSupport } from "./middlewares/promiseSupport";
 
 declare var window: Window & DevToolsExtension;
 
@@ -37,7 +38,7 @@ export class Store {
         this.ngRedux = new NgRedux();
         const Immutable = require('seamless-immutable');
 
-        const middleware = [actionTypesSupport];
+        const middleware = [promiseSupport, actionTypesSupport];
         let enhancers = [];
 
         //enable in prod?

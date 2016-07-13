@@ -1,6 +1,7 @@
 import {Injectable, Inject, forwardRef} from '@angular/core';
 import {Store} from "./../Store";
 import {ActionType} from "./ActionType";
+import {AppState} from "../AppState";
 
 @Injectable()
 export class ActionCreator {
@@ -12,6 +13,19 @@ export class ActionCreator {
             type: actionType,
             payload
         });
+    }
+
+    dispatchRequest(actionType: string | ActionType, promise: Promise, payload?: any): Promise  {
+        this.store.dispatch({
+            type: actionType,
+            promise,
+            payload
+        });
+        return promise;
+    }
+
+    getState(): AppState {
+        return this.store.getState();
     }
 
 }
