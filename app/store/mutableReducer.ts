@@ -10,6 +10,7 @@ import {PARTS_MANAGERS_PROPERTY, InnerManagerDescription} from "./managers/manag
 import {ACTIONS_MAP_PROPERTY, RETURN_VALUES_METHODS_PROPERTY} from "./managers/action";
 import {ActionType, getActionTypeString} from "./actions/ActionType";
 import {ArrayItemManagerDescription, ARRAY_ITEM_MANAGERS_PROPERTY} from "./managers/arrayItemManager";
+import {REDUCERS_PROPERTY, ReducerDescription} from "./managers/reducer";
 
 const rootManager: RootManager = new RootManager();
 
@@ -60,6 +61,11 @@ function manageAction(statePart: any, action: Action, state: AppState, manager: 
                     }
                 }
             }
+        });
+
+        const reducersDescription: ReducerDescription[] = manager[REDUCERS_PROPERTY] || [];
+        reducersDescription.forEach(description => {
+            statePart[description.selector] = description.reducer(statePart[description.selector], description.actionMapper(action));
         });
     }
 
