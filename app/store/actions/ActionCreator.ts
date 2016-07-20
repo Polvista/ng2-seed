@@ -15,7 +15,7 @@ export class ActionCreator {
         });
     }
 
-    dispatchRequest(actionType: string | ActionType, promise: Promise, payload?: any): Promise  {
+    dispatchRequest(actionType: string | ActionType, promise: Promise<any>, payload?: any): Promise<any>  {
         this.store.dispatch({
             type: actionType,
             promise,
