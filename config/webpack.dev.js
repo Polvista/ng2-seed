@@ -6,6 +6,12 @@ var DefinePlugin = require('webpack/lib/DefinePlugin');
 
 var ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 
+try {
+    var customization = require('./customization');
+} catch(e) {
+    customization = {};
+}
+
 module.exports = webpackMerge(commonConfig, {
 
     devtool: 'cheap-module-source-map',

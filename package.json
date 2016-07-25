@@ -30,6 +30,7 @@
     "angular2-universal": "^0.104.1",
     "autoprefixer": "^6.3.6",
     "body-parser": "^1.15.2",
+    "clean-webpack-plugin": "^0.1.10",
     "core-js": "2.2.2",
     "css-loader": "^0.23.1",
     "es6-shim": "0.35.0",

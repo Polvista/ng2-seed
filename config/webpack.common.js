@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var rucksack = require('rucksack-css');
+var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -54,6 +55,11 @@ module.exports = {
 
         new HtmlWebpackPlugin({
             template: './app/index.html'
+        }),
+
+        new CleanWebpackPlugin(['dist'], {
+            root: path.join(__dirname, '..'),
+            verbose: true
         })
     ],
 
